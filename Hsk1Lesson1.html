@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HSK1 Lesson1 Practice: AI小语，你好！</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+        body {
+            max-width: 700px;
+            margin: 20px auto;
+            padding: 0 16px;
+            background-color: #f8f9fa;
+        }
+        section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 6px #00000015;
+        }
+        h2 {
+            color: #d63031;
+            font-size: 20px;
+            margin-top: 0;
+        }
+        input, textarea, button {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0 16px;
+            font-size: 18px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+        button {
+            background-color: #2980b9;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #1f618d;
+        }
+        .result-box {
+            background: #ecf0f1;
+            padding:14px;
+            border-radius: 8px;
+            display:none;
+        }
+        .question-block{
+            display:block;
+        }
+    </style>
+</head>
+<body>
+    <h1>HSK 1 Lesson 1 Practice Page</h1>
+
+    <!-- SECTION 1: INTERACTIVE WORD TYPING PRACTICE -->
+    <section>
+        <h2>✍️ Word Typing Practice</h2>
+        <div id="wordArea">
+            <div id="wordQuestion">
+            </div>
+            <button id="nextWordBtn">Next</button>
+        </div>
+        <div class="result-box" id="wordResultBox">
+            <h3>Practice Result</h3>
+            <p id="wordScoreText"></p>
+            <p id="wrongWordList"></p>
+            <button id="restartWordBtn">Restart Practice</button>
+        </div>
+    </section>
+
+    <!-- SECTION2: READING & MCQs -->
+    <section>
+        <h2>📖 Reading & MCQs</h2>
+        <div id="readingPara">
+            <p>Today is the first day of Chinese class. Many new students come to the classroom. The teacher says: “Dàjiā hǎo!” Students answer: “Lǎoshī, nín hǎo!” After class, students say xièxie to their teacher and say zàijiàn to each other.</p>
+        </div>
+        <div id="mcqBlock">
+            <div style="margin-bottom:18px;">
+                <p>1. Who says "Dàjiā hǎo!"?</p>
+                <input type="radio" name="q1" value="A"> A. The teacher<br>
+                <input type="radio" name="q1" value="B"> B. A student<br>
+            </div>
+            <div style="margin-bottom:18px;">
+                <p>2. What will students say to leave class?</p>
+                <input type="radio" name="q2" value="A"> A. zàijiàn<br>
+                <input type="radio" name="q2" value="B"> B. xièxie<br>
+            </div>
+            <div style="margin-bottom:18px;">
+                <p>3. “Nín hǎo” students say to ____</p>
+                <input type="radio" name="q3" value="A"> A. classmates<br>
+                <input type="radio" name="q3" value="B"> B. teacher<br>
+            </div>
+            <button id="submitMcqBtn">Submit MCQs</button>
+        </div>
+        <div class="result-box" id="mcqResultBox">
+            <h3>MCQ Result</h3>
+            <p id="mcqScoreText"></p>
+            <p id="mcqExplanation"></p>
+        </div>
+    </section>
+
+    <!-- SECTION3: WRITING PRACTICE -->
+    <section>
+        <h2>📝 Writing Practice</h2>
+        <p>Fill in blanks with words you learned:</p>
+        <p>1. ________! (hello) Wang lǎoshī!</p>
+        <textarea placeholder="Type Chinese character here..."></textarea>
+        <p>2. ________! (goodbye), classmates!</p>
+        <textarea placeholder="Type Chinese character here..."></textarea>
+        <p>Make one simple sentence with the word 老师(lǎoshī):</p>
+        <textarea placeholder="Write your Chinese sentence here..."></textarea>
+        <p><em>Sample Answers Reference: 1.你好  2.再见 | Sentence sample: 老师，你好！</em></p>
+    </section>
+
+
+<script>
+// ========== WORD PRACTICE DATA ==========
+const wordList = [
+    {char:"你好", pinyin:"nǐ hǎo", eng:"hello"},
+    {char:"王老师", pinyin:"Wáng lǎoshī", eng:"Ms. Wang"},
+    {char:"大家", pinyin:"dàjiā", eng:"everybody"},
+    {char:"好", pinyin:"hǎo", eng:"good; fine"},
+    {char:"学生", pinyin:"xuéshēng", eng:"student"},
+    {char:"们", pinyin:"men", eng:"plural suffix"},
+    {char:"老师", pinyin:"lǎoshī", eng:"teacher"},
+    {char:"您", pinyin:"nín", eng:"you (honorific)"},
+    {char:"你们", pinyin:"nǐmen", eng:"you (plural)"},
+    {char:"谢谢", pinyin:"xièxie", eng:"thank you"},
+    {char:"不客气", pinyin:"bú kèqi", eng:"you're welcome"},
+    {char:"同学", pinyin:"tóngxué", eng:"classmate"},
+    {char:"再见", pinyin:"zàijiàn", eng:"goodbye"},
+];
+let currentWordIndex = 0;
+let userAnswers = [];
+const wordQuestionDiv = document.getElementById("wordQuestion");
+const nextWordBtn = document.getElementById("nextWordBtn");
+const wordResultBox = document.getElementById("wordResultBox");
+const wordScoreText = document.getElementById("wordScoreText");
+const wrongWordListEl = document.getElementById("wrongWordList");
+const restartWordBtn = document.getElementById("restartWordBtn");
+
+// Load one word question
+function loadWordQuestion(){
+    const w = wordList[currentWordIndex];
+    wordQuestionDiv.innerHTML = `
+        <p style="font-size:20px;">Pinyin: <strong>${w.pinyin}</strong></p>
+        <p style="font-size:18px;">Meaning: ${w.eng}</p>
+        <input type="text" id="wordInputBox" placeholder="Type Chinese character here">
+    `;
+}
+// Next button click
+nextWordBtn.onclick = function(){
+    const inputBox = document.getElementById("wordInputBox");
+    userAnswers.push({
+        correctChar: wordList[currentWordIndex].char,
+        userInput: inputBox.value.trim()
+    })
+    currentWordIndex++;
+    if(currentWordIndex >= wordList.length){
+        // END OF ROUND -> SHOW RESULT
+        showWordResult();
+    }else{
+        loadWordQuestion();
+    }
+}
+function showWordResult(){
+    document.getElementById("wordArea").style.display = "none";
+    wordResultBox.style.display = "block";
+    let correctCount = 0;
+    let wrongWords = [];
+    userAnswers.forEach(ans=>{
+        if(ans.userInput === ans.correctChar){
+            correctCount++;
+        }else{
+            wrongWords.push(ans.correctChar);
+        }
+    })
+    wordScoreText.innerText = `Score: ${correctCount} / ${wordList.length}`;
+    wrongWordListEl.innerText = wrongWords.length>0 ? `Words you need to practice more: ${wrongWords.join(", ")}` : `Wow! All words correct ✅`;
+}
+restartWordBtn.onclick = function(){
+    currentWordIndex = 0;
+    userAnswers = [];
+    document.getElementById("wordArea").style.display = "block";
+    wordResultBox.style.display = "none";
+    loadWordQuestion();
+}
+loadWordQuestion();
+
+// ========== MCQ SECTION ==========
+const submitMcqBtn = document.getElementById("submitMcqBtn");
+const mcqResultBox = document.getElementById("mcqResultBox");
+const mcqScoreText = document.getElementById("mcqScoreText");
+const mcqExplanation = document.getElementById("mcqExplanation");
+submitMcqBtn.onclick = function(){
+    let mcqCorrect = 0;
+    const q1 = document.querySelector('input[name="q1"]:checked')?.value;
+    const q2 = document.querySelector('input[name="q2"]:checked')?.value;
+    const q3 = document.querySelector('input[name="q3"]:checked')?.value;
+    if(q1==="A") mcqCorrect++;
+    if(q2==="A") mcqCorrect++;
+    if(q3==="B") mcqCorrect++;
+    mcqResultBox.style.display = "block";
+    mcqScoreText.innerText = `MCQ Score: ${mcqCorrect}/3`;
+    mcqExplanation.innerText = "Explanation: 1.Teacher greets everyone. 2.zàijiàn means goodbye for leaving class. 3.Nín hǎo (honorific you) we use for teachers."
+}
+</script>
+</body>
+</html>

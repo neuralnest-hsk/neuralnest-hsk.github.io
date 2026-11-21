@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- SEO Meta Tags for Google (already added as you asked) -->
+    <title>HSK 1 Lesson 2 Practice | 我叫李文 Self Study Exercises</title>
+    <meta name="description" content="Free HSK1 Lesson 2 self-study practice page, vocabulary typing, reading MCQs & writing exercises for new HSK learners.">
+    <style>
+        body{font-family:Arial, sans-serif; max-width:900px; margin:20px auto; padding:0 16px; background:#ffffff;}
+        .card{background:#fff; border-radius:12px; padding:24px; margin-bottom:24px; box-shadow:0 1px 5px #0000001a;}
+        h1{font-size:28px;}
+        h2{color:#c82423; display:flex; align-items:center; gap:8px; font-size:22px;}
+        input{width:100%; padding:14px; font-size:18px; box-sizing:border-box; border:1px solid #ccc; border-radius:8px; margin:12px 0;}
+        button{width:100%; padding:14px; background:#1976D2; color:white; font-size:18px; border:none; border-radius:8px; margin-top:12px;}
+        .result-box{margin-top:16px; padding:16px; background:#f0f0f0; border-radius:8px;}
+    </style>
+</head>
+<body>
+    <h1>HSK 1 Lesson 2 Practice Page</h1>
+
+    <!-- Word Typing Practice -->
+    <div class="card">
+        <h2>✍️ Word Typing Practice</h2>
+        <div id="wordBox">
+            <p>Pinyin: <span id="pinyin">qǐngwèn</span></p>
+            <p>Meaning: <span id="meaning">excuse me</span></p>
+            <input type="text" id="wordInput" placeholder="Type Chinese character here">
+        </div>
+        <button onclick="nextWord()">Next</button>
+    </div>
+
+    <!-- Reading & MCQs -->
+    <div class="card">
+        <h2>📖 Reading & MCQs</h2>
+        <p>Chen Tianzhong meets Bai Jiayue on campus. At first, Chen Tianzhong greets and calls her Annie by mistake. Bai Jiayue tells him her real name. Chen Tianzhong says duìbuqǐ, and Bai Jiayue replies méi guānxi. Later Li Wen meets Bai Jiayue for the first time. Li Wen says: “Hěn gāoxìng rènshi nǐ.” Bai Jiayue answers, “Rènshi nǐ wǒ yě hěn gāoxìng.” They introduce themselves and tell each other their names.</p>
+        <br>
+        <p>1. What does Chen Tianzhong say after he mistakes Bai Jiayue for Annie?</p>
+        <input type="radio" name="q1" value="A"> A. duìbuqǐ<br>
+        <input type="radio" name="q1" value="B"> B. méi guānxi<br>
+        <br>
+        <p>2. Who says “Hěn gāoxìng rènshi nǐ”?</p>
+        <input type="radio" name="q2" value="A"> A. Li Wen<br>
+        <input type="radio" name="q2" value="B"> B. Bai Jiayue<br>
+        <br>
+        <p>3. What does yě mean?</p>
+        <input type="radio" name="q3" value="A"> A. also / too<br>
+        <input type="radio" name="q3" value="B"> B. very<br>
+
+        <button onclick="submitMcq()">Submit MCQs</button>
+        <div id="mcqResult" class="result-box"></div>
+    </div>
+
+    <!-- Writing Practice ✅ FULLY ACTIVE NOW with submit & auto check -->
+    <div class="card">
+        <h2>✏️ Writing Practice</h2>
+        <p>Fill in blanks with words you learned:</p>
+        <p>1. ________! (sorry) </p>
+        <input type="text" id="w1" placeholder="Write here">
+        <p>2. ________! (It’s okay)</p>
+        <input type="text" id="w2" placeholder="Write here">
+        <p>Make one simple sentence with the word 认识 (rènshi):</p>
+        <input type="text" id="w3" placeholder="Write your sentence (must include 认识)">
+
+        <button onclick="submitWriting()">Submit Writing</button>
+        <div id="writingResult" class="result-box"></div>
+    </div>
+
+    <script>
+        // Word Typing Data
+        const wordList = [
+            {pinyin:"qǐngwèn", meaning:"excuse me", char:"请问"},
+            {pinyin:"nǐ", meaning:"you", char:"你"},
+            {pinyin:"jiào", meaning:"be called", char:"叫"},
+            {pinyin:"shénme", meaning:"what", char:"什么"},
+            {pinyin:"míngzi", meaning:"name", char:"名字"},
+            {pinyin:"wǒ", meaning:"I / me", char:"我"},
+            {pinyin:"bù", meaning:"not / no", char:"不"},
+            {pinyin:"shì", meaning:"be (is/am/are)", char:"是"},
+            {pinyin:"duìbuqǐ", meaning:"sorry", char:"对不起"},
+            {pinyin:"méi guānxi", meaning:"it’s okay / never mind", char:"没关系"},
+            {pinyin:"méishì", meaning:"it doesn’t matter", char:"没事"},
+            {pinyin:"hěn", meaning:"very", char:"很"},
+            {pinyin:"gāoxìng", meaning:"glad / happy", char:"高兴"},
+            {pinyin:"rènshi", meaning:"to know / meet (get acquainted)", char:"认识"},
+            {pinyin:"yě", meaning:"also / too", char:"也"},
+        ];
+        let currentWord = 0;
+        function nextWord(){
+            currentWord++;
+            if(currentWord >= wordList.length){
+                currentWord = 0;
+            }
+            document.getElementById("pinyin").innerText = wordList[currentWord].pinyin;
+            document.getElementById("meaning").innerText = wordList[currentWord].meaning;
+            document.getElementById("wordInput").value = "";
+        }
+
+        // MCQ Check
+        function submitMcq(){
+            let score = 0;
+            let feed = "";
+            let q1 = document.querySelector('input[name="q1"]:checked')?.value;
+            let q2 = document.querySelector('input[name="q2"]:checked')?.value;
+            let q3 = document.querySelector('input[name="q3"]:checked')?.value;
+            if(q1==="A"){score++; feed += "✅ Q1 Correct<br>"}else{feed += "❌ Q1 Answer: A. duìbuqǐ<br>"}
+            if(q2==="A"){score++; feed += "✅ Q2 Correct<br>"}else{feed += "❌ Q2 Answer: A. Li Wen<br>"}
+            if(q3==="A"){score++; feed += "✅ Q3 Correct<br>"}else{feed += "❌ Q3 Answer: A. also / too<br>"}
+            feed += `<br><strong>MCQ Score: ${score}/3</strong>`;
+            document.getElementById("mcqResult").innerHTML = feed;
+        }
+
+        // ✅ Writing Submit & Check Function (FULLY ON)
+        function submitWriting(){
+            let w1Ans = document.getElementById("w1").value.trim();
+            let w2Ans = document.getElementById("w2").value.trim();
+            let w3Ans = document.getElementById("w3").value.trim();
+            let score = 0;
+            let feed = "";
+
+            // Q1 exact match: 对不起
+            if(w1Ans === "对不起"){
+                score++;
+                feed += "✅ Q1 Correct<br>";
+            }else{
+                feed += "❌ Q1 Correct Answer: 对不起<br>";
+            }
+            // Q2 exact match: 没关系
+            if(w2Ans === "没关系"){
+                score++;
+                feed += "✅ Q2 Correct<br>";
+            }else{
+                feed += "❌ Q2 Correct Answer: 没关系<br>";
+            }
+            // Q3 flexible check: sirf word "认识" hona chahiye sentence mein
+            if(w3Ans.includes("认识")){
+                score++;
+                feed += "✅ Q3 Correct (Your sentence includes required word 认识)<br>";
+            }else{
+                feed += "❌ Q3: Please write a sentence that must include 认识<br>";
+            }
+            feed += `<br><strong>Writing Score: ${score}/3</strong>`;
+            document.getElementById("writingResult").innerHTML = feed;
+        }
+    </script>
+</body>
+</html>

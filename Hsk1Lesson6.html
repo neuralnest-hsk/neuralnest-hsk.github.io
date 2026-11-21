@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HSK1 Lesson6 Practice</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            background-color: #fefefe;
+        }
+        h1 {
+            color: #b82e2e;
+            margin-bottom: 2rem;
+            font-size: 24px;
+        }
+        h2 {
+            color:#b82e2e;
+            margin:2rem 0 1rem;
+            font-size:22px;
+        }
+        .card{
+            border-radius:12px;
+            padding:1.5rem;
+            background:#ffffff;
+            box-shadow: 0 0 6px #0000001a;
+            margin-bottom:2rem;
+        }
+        .card p{
+            font-size:18px;
+            margin:0.6rem 0;
+            line-height:1.6;
+        }
+        input, textarea{
+            width:100%;
+            padding:0.9rem;
+            border:1px solid #ccc;
+            border-radius:8px;
+            font-size:18px;
+            margin:1rem 0;
+        }
+        button{
+            background:#2277dd;
+            color:white;
+            border:none;
+            padding:0.9rem 1.4rem;
+            border-radius:8px;
+            font-size:18px;
+            margin:0.4rem;
+            cursor:pointer;
+        }
+        .mcq-option{
+            display:block;
+            margin:0.5rem 0;
+        }
+        .result-text{
+            margin-top:1rem;
+            font-weight:bold;
+            font-size:18px;
+        }
+        .correct{
+            color:green;
+        }
+        .wrong{
+            color:red;
+        }
+    </style>
+</head>
+<body>
+    <h1>HSK 1 Lesson 6 Practice</h1>
+
+    <!-- ✍️ Word Typing Practice -->
+    <div class="card">
+        <h2>✍️ Word Typing Practice (Exact Answer Check)</h2>
+        <p id="pinyinText">Pinyin:</p>
+        <p id="meaningText">Meaning:</p>
+        <input id="charInput" placeholder="Write the correct Chinese character(s) here">
+        <br>
+        <button onclick="submitWord()">Submit Word</button>
+        <button onclick="nextWord()">Next</button>
+        <br>
+        <button onclick="showVocabScore()">Show Final Vocabulary Score</button>
+        <p id="vocabFeedback" class="result-text"></p>
+        <p id="vocabScoreText" class="result-text"></p>
+    </div>
+
+    <!-- 📖 Reading & MCQs -->
+    <div class="card">
+        <h2>📖 Reading & MCQs</h2>
+        <p><strong>Dialogue 1</strong></p>
+        <p>家月，你的手机号是多少？<br>我的手机号是 +33 601493190。<br>我的手机号是 +86 13552721160。<br>好的。</p>
+        <br>
+        <p><strong>Questions for Dialogue 1</strong></p>
+        <p>Q1：李文问白家月什么？</p>
+        <label class="mcq-option"><input type="radio" name="d1q1" value="A"> A. 手机号是多少</label>
+        <label class="mcq-option"><input type="radio" name="d1q1" value="B"> B. 电话是多少</label>
+        <label class="mcq-option"><input type="radio" name="d1q1" value="C"> C. 名字是什么</label>
+
+        <p style="margin-top:1rem;"><strong>Q2：白家月的手机号开头是？</strong></p>
+        <label class="mcq-option"><input type="radio" name="d1q2" value="A"> A. +33</label>
+        <label class="mcq-option"><input type="radio" name="d1q2" value="B"> B. +86</label>
+        <label class="mcq-option"><input type="radio" name="d1q2" value="C"> C. +66</label>
+
+        <p style="margin-top:1rem;"><strong>Q3：李文的手机号开头是？</strong></p>
+        <label class="mcq-option"><input type="radio" name="d1q3" value="A"> A. +33</label>
+        <label class="mcq-option"><input type="radio" name="d1q3" value="B"> B. +86</label>
+        <label class="mcq-option"><input type="radio" name="d1q3" value="C"> C. +96</label>
+
+        <p style="margin-top:1rem;"><strong>Q4：白家月最后回答？</strong></p>
+        <label class="mcq-option"><input type="radio" name="d1q4" value="A"> A. 好的</label>
+        <label class="mcq-option"><input type="radio" name="d1q4" value="B"> B. 不是</label>
+        <label class="mcq-option"><input type="radio" name="d1q4" value="C"> C. 不知道</label>
+        <hr style="margin:2rem 0;">
+        <p><strong>Dialogue 2</strong></p>
+        <p>家月，明天你去哪儿？<br>我想去超市买东西。<br>你去超市买什么？<br>我想买些牛奶。</p>
+        <br>
+        <p><strong>Questions for Dialogue 2</strong></p>
+        <p>Q5：他们什么时候聊？</p>
+        <label class="mcq-option"><input type="radio" name="d2q1" value="A"> A. 明天</label>
+        <label class="mcq-option"><input type="radio" name="d2q1" value="B"> B. 今天</label>
+        <label class="mcq-option"><input type="radio" name="d2q1" value="C"> C. 后天</label>
+
+        <p style="margin-top:1rem;"><strong>Q6：白家月想去哪儿？</strong></p>
+        <label class="mcq-option"><input type="radio" name="d2q2" value="A"> A. 超市</label>
+        <label class="mcq-option"><input type="radio" name="d2q2" value="B"> B. 饭店</label>
+        <label class="mcq-option"><input type="radio" name="d2q2" value="C"> C. 学校</label>
+
+        <p style="margin-top:1rem;"><strong>Q7：白家月想去超市做什么？</strong></p>
+        <label class="mcq-option"><input type="radio" name="d2q3" value="A"> A. 买东西</label>
+        <label class="mcq-option"><input type="radio" name="d2q3" value="B"> B. 吃饭</label>
+        <label class="mcq-option"><input type="radio" name="d2q3" value="C"> C. 休息</label>
+
+        <p style="margin-top:1rem;"><strong>Q8：白家月想买什么？</strong></p>
+        <label class="mcq-option"><input type="radio" name="d2q4" value="A"> A. 牛奶</label>
+        <label class="mcq-option"><input type="radio" name="d2q4" value="B"> B. 包子</label>
+        <label class="mcq-option"><input type="radio" name="d2q4" value="C"> C. 米饭</label>
+        <br>
+        <button onclick="submitReading()">Submit MCQs</button>
+        <p id="readingScoreText" class="result-text"></p>
+    </div>
+
+    <!-- ✍️ Writing Section (6 Questions Total) -->
+    <div class="card">
+        <h2>✍️ Writing Practice (Lesson 6)</h2>
+        <p>Instructions: Fill in the blanks using words you learned in Lesson 6. Write Chinese characters.</p>
+        <p>1. Wǒ ______ qù chāoshì. (I want to go to the supermarket)</p>
+        <input id="w1Input" placeholder="Write Chinese character(s)">
+
+        <p>2. Wǒ qù chāoshì ______ niúnǎi. (I go to the supermarket to buy milk)</p>
+        <input id="w2Input" placeholder="Write Chinese character(s)">
+
+        <p>3. ______ nǐ qù nǎr? (Tomorrow, where are you going?)</p>
+        <input id="w3Input" placeholder="Write Chinese character(s)">
+
+        <p>4. Wǒ xiǎng hē ______. (I want to drink milk)</p>
+        <input id="w4Input" placeholder="Write Chinese character(s)">
+
+        <p>5. Wǒ ______ chūzūchē qù fàndiàn. (I take a taxi to the restaurant)</p>
+        <input id="w5Input" placeholder="Write Chinese character(s)">
+
+        <p>6. Make one simple sentence with the word <strong>超市(chāoshì)</strong>. Your sentence must include 超市.</p>
+        <textarea id="sentenceInput" rows="3" placeholder="Write your Chinese sentence"></textarea>
+
+        <br>
+        <button onclick="submitWriting()">Submit Writing</button>
+        <p id="writingScoreText" class="result-text"></p>
+        <p id="writingFeedbackText" class="result-text"></p>
+    </div>
+
+    <script>
+        // ========== Word Typing ==========
+        const wordList = [
+            {char:"手机", pinyin:"shǒujī", meaning:"cell phone"},
+            {char:"电话", pinyin:"diànhuà", meaning:"telephone"},
+            {char:"号", pinyin:"hào", meaning:"number"},
+            {char:"明天", pinyin:"míngtiān", meaning:"tomorrow"},
+            {char:"去", pinyin:"qù", meaning:"go to"},
+            {char:"哪儿", pinyin:"nǎr", meaning:"where"},
+            {char:"想", pinyin:"xiǎng", meaning:"want / would like"},
+            {char:"超市", pinyin:"chāoshì", meaning:"supermarket"},
+            {char:"买", pinyin:"mǎi", meaning:"buy"},
+            {char:"东西", pinyin:"dōngxi", meaning:"thing"},
+            {char:"些", pinyin:"xiē", meaning:"some; a few"},
+            {char:"牛奶", pinyin:"niúnǎi", meaning:"milk"},
+            {char:"吃", pinyin:"chī", meaning:"eat; have"},
+            {char:"晚饭", pinyin:"wǎnfàn", meaning:"dinner"},
+            {char:"那边", pinyin:"nàbiān", meaning:"there"},
+            {char:"包子", pinyin:"bāozi", meaning:"steamed stuffed bun"},
+            {char:"非常", pinyin:"fēicháng", meaning:"very; extremely"},
+            {char:"好吃", pinyin:"hǎochī", meaning:"tasty; delicious"},
+            {char:"米饭", pinyin:"mǐfàn", meaning:"(cooked) rice"},
+            {char:"怎么", pinyin:"zěnme", meaning:"how"},
+            {char:"坐", pinyin:"zuò", meaning:"take; travel by or on"},
+            {char:"出租车", pinyin:"chūzūchē", meaning:"taxi"}
+        ];
+        let currentWordIndex = 0;
+        let vocabCorrect = 0;
+        function loadWord(){
+            if(currentWordIndex >= wordList.length){
+                document.getElementById("pinyinText").innerText = "✅ All vocabulary practice finished!";
+                document.getElementById("meaningText").innerText = "";
+                return;
+            }
+            let w = wordList[currentWordIndex];
+            document.getElementById("pinyinText").innerText = "Pinyin: " + w.pinyin;
+            document.getElementById("meaningText").innerText = "Meaning: " + w.meaning;
+            document.getElementById("charInput").value = "";
+            document.getElementById("vocabFeedback").innerText = "";
+        }
+        function submitWord(){
+            if(currentWordIndex >= wordList.length) return;
+            let userAns = document.getElementById("charInput").value.trim();
+            let correctAns = wordList[currentWordIndex].char;
+            if(userAns === correctAns){
+                document.getElementById("vocabFeedback").innerText = "✅ Correct!";
+                document.getElementById("vocabFeedback").className = "result-text correct";
+                vocabCorrect++;
+            }else{
+                document.getElementById("vocabFeedback").innerText = "❌ Wrong! Correct answer: "+correctAns;
+                document.getElementById("vocabFeedback").className = "result-text wrong";
+            }
+        }
+        function nextWord(){
+            currentWordIndex++;
+            loadWord();
+        }
+        function showVocabScore(){
+            let total = wordList.length;
+            document.getElementById("vocabScoreText").innerText = `Vocabulary Score: ${vocabCorrect} / ${total}`;
+        }
+        loadWord();
+
+        // ========== Reading MCQ ==========
+        function submitReading(){
+            let rCorrect = 0;
+            const d1q1 = document.querySelector('input[name="d1q1"]:checked');
+            const d1q2 = document.querySelector('input[name="d1q2"]:checked');
+            const d1q3 = document.querySelector('input[name="d1q3"]:checked');
+            const d1q4 = document.querySelector('input[name="d1q4"]:checked');
+            const d2q1 = document.querySelector('input[name="d2q1"]:checked');
+            const d2q2 = document.querySelector('input[name="d2q2"]:checked');
+            const d2q3 = document.querySelector('input[name="d2q3"]:checked');
+            const d2q4 = document.querySelector('input[name="d2q4"]:checked');
+            if(d1q1?.value === "A") rCorrect++;
+            if(d1q2?.value === "A") rCorrect++;
+            if(d1q3?.value === "B") rCorrect++;
+            if(d1q4?.value === "A") rCorrect++;
+            if(d2q1?.value === "A") rCorrect++;
+            if(d2q2?.value === "A") rCorrect++;
+            if(d2q3?.value === "A") rCorrect++;
+            if(d2q4?.value === "A") rCorrect++;
+            document.getElementById("readingScoreText").innerText = `Reading MCQ Score: ${rCorrect} / 8`;
+        }
+
+        // ========== Writing ==========
+        function submitWriting(){
+            let w1Ans = document.getElementById("w1Input").value.trim();
+            let w2Ans = document.getElementById("w2Input").value.trim();
+            let w3Ans = document.getElementById("w3Input").value.trim();
+            let w4Ans = document.getElementById("w4Input").value.trim();
+            let w5Ans = document.getElementById("w5Input").value.trim();
+            let sentenceText = document.getElementById("sentenceInput").value.trim();
+            let wScore = 0;
+            const ans1 = "想";
+            const ans2 = "买";
+            const ans3 = "明天";
+            const ans4 = "牛奶";
+            const ans5 = "坐";
+            if(w1Ans === ans1) wScore++;
+            if(w2Ans === ans2) wScore++;
+            if(w3Ans === ans3) wScore++;
+            if(w4Ans === ans4) wScore++;
+            if(w5Ans === ans5) wScore++;
+            let feedbackMsg = "";
+            feedbackMsg += `Blank Answers: Q1=${ans1}, Q2=${ans2}, Q3=${ans3}, Q4=${ans4}, Q5=${ans5}\n`;
+            if(sentenceText.includes("超市")){
+                feedbackMsg += "✅ Your sentence includes the required word 超市!\n";
+            }else{
+                feedbackMsg += "❌ Your sentence must include the word 超市\n";
+            }
+            document.getElementById("writingScoreText").innerText = `Writing Fill‑in Score: ${wScore} / 5`;
+            document.getElementById("writingFeedbackText").innerText = feedbackMsg;
+        }
+    </script>
+</body>
+</html>

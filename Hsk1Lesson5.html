@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HSK1 Lesson5 Practice | 今天我休息</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            background-color: #fefefe;
+        }
+        h1 {
+            color: #b83227;
+            margin-bottom: 2rem;
+            font-size: 24px;
+        }
+        h2 {
+            color:#b83227;
+            margin:2rem 0 1rem;
+            font-size:22px;
+        }
+        .card{
+            border-radius:12px;
+            padding:1.5rem;
+            background:#ffffff;
+            box-shadow: 0 0 6px #0000001a;
+            margin-bottom:2rem;
+        }
+        .card p{
+            font-size:18px;
+            margin:0.6rem 0;
+        }
+        input, textarea{
+            width:100%;
+            padding:0.9rem;
+            border:1px solid #ccc;
+            border-radius:8px;
+            font-size:18px;
+            margin:1rem 0;
+        }
+        button{
+            background:#2277dd;
+            color:white;
+            border:none;
+            padding:0.9rem 1.4rem;
+            border-radius:8px;
+            font-size:18px;
+            margin:0.4rem;
+            cursor:pointer;
+        }
+        .mcq-option{
+            display:block;
+            margin:0.5rem 0;
+        }
+        .result-text{
+            margin-top:1rem;
+            font-weight:bold;
+            font-size:18px;
+        }
+        .correct{
+            color:green;
+        }
+        .wrong{
+            color:red;
+        }
+    </style>
+</head>
+<body>
+    <h1>HSK 1 第五课 练习 | 今天我休息</h1>
+
+    <!-- ✍️ Word Typing Practice -->
+    <div class="card">
+        <h2>✍️ 词语打字练习（核对正确答案）</h2>
+        <div id="wordArea">
+            <p id="pinyinText">拼音：</p>
+            <p id="meaningText">意思：</p>
+            <input id="charInput" placeholder="在这里写出正确的汉字">
+            <br>
+            <button onclick="submitWord()">提交词语</button>
+            <button onclick="nextWord()">下一个</button>
+            <br>
+            <button onclick="showVocabScore()">查看词语总分数</button>
+            <p id="vocabFeedback" class="result-text"></p>
+            <p id="vocabScoreText" class="result-text"></p>
+        </div>
+    </div>
+
+    <!-- 📖 Reading & MCQs (2 Dialogues, exam/paper style) -->
+    <div class="card">
+        <h2>📖 阅读与选择题</h2>
+        <p><strong>对话一：</strong></p>
+        <p>在家里，刘明和王一雪在聊天儿。<br>王一雪问：今天几号？<br>刘明回答：今天9月8号。<br>王一雪又问：星期几？<br>刘明说：星期日。今天我休息。</p>
+        <br>
+        <p><strong>对话二：</strong></p>
+        <p>在公司里，王一雪和杨同乐聊天儿。<br>王一雪问：同乐，下班吗？<br>杨同乐说：下班。<br>王一雪问：这是你的新电脑吗？<br>杨同乐说：是的，是我的新电脑。<br>王一雪说：真好看！<br>杨同乐说：我也很喜欢它。</p>
+        <br>
+        <div id="readingQuiz">
+            <p><strong>第一题：今天几号？</strong></p>
+            <label class="mcq-option"><input type="radio" name="q1" value="A"> A. 9月8号</label>
+            <label class="mcq-option"><input type="radio" name="q1" value="B"> B. 8月9号</label>
+            <label class="mcq-option"><input type="radio" name="q1" value="C"> C. 9月18号</label>
+
+            <p style="margin-top:1rem;"><strong>第二题：今天星期几？</strong></p>
+            <label class="mcq-option"><input type="radio" name="q2" value="A"> A. 星期一</label>
+            <label class="mcq-option"><input type="radio" name="q2" value="B"> B. 星期日</label>
+            <label class="mcq-option"><input type="radio" name="q2" value="C"> C. 星期六</label>
+
+            <p style="margin-top:1rem;"><strong>第三题：杨同乐的新东西是什么？</strong></p>
+            <label class="mcq-option"><input type="radio" name="q3" value="A"> A. 手机</label>
+            <label class="mcq-option"><input type="radio" name="q3" value="B"> B. 电脑</label>
+            <label class="mcq-option"><input type="radio" name="q3" value="C"> C. 书</label>
+            <br>
+            <button onclick="submitReading()">提交阅读答案</button>
+            <p id="readingScoreText" class="result-text"></p>
+        </div>
+    </div>
+
+    <!-- ✍️ Writing Practice (All instructions in Chinese characters) -->
+    <div class="card">
+        <h2>✍️ 写作练习（第五课）</h2>
+        <p>请用第五课学过的词语填空：</p>
+        <p>1. 今天是______。（今天是星期日）</p>
+        <input id="w1Input" placeholder="在这里写汉字">
+
+        <p>2. 今天我______。（我休息）</p>
+        <input id="w2Input" placeholder="在这里写汉字">
+
+        <p>3. 这是我的______电脑。（这是我的新电脑）</p>
+        <input id="w3Input" placeholder="在这里写汉字">
+
+        <p>用词语<strong>休息</strong>写一个简单的句子：</p>
+        <textarea id="sentenceInput" rows="3" placeholder="写一句话，句子里一定要有“休息”"></textarea>
+
+        <br>
+        <button onclick="submitWriting()">提交写作</button>
+        <p id="writingScoreText" class="result-text"></p>
+        <p id="writingFeedbackText" class="result-text"></p>
+    </div>
+
+    <script>
+        // ========== WORD PRACTICE ==========
+        const wordList = [
+            {char:"今天", pinyin:"jīntiān", meaning:"今天"},
+            {char:"号", pinyin:"hào", meaning:"日期"},
+            {char:"月", pinyin:"yuè", meaning:"月份"},
+            {char:"日", pinyin:"rì", meaning:"天"},
+            {char:"星期", pinyin:"xīngqī", meaning:"星期"},
+            {char:"星期日", pinyin:"Xīngqīrì", meaning:"星期日"},
+            {char:"星期天", pinyin:"Xīngqītiān", meaning:"星期日"},
+            {char:"休息", pinyin:"xiūxi", meaning:"休息"},
+            {char:"会", pinyin:"huì", meaning:"会（能）"},
+            {char:"做饭", pinyin:"zuò fàn", meaning:"做饭"},
+            {char:"做", pinyin:"zuò", meaning:"做"},
+            {char:"面条儿", pinyin:"miàntiáor", meaning:"面条儿"},
+            {char:"饺子", pinyin:"jiǎozi", meaning:"饺子"},
+            {char:"一些", pinyin:"yìxiē", meaning:"一些"},
+            {char:"菜", pinyin:"cài", meaning:"菜"},
+            {char:"下班", pinyin:"xiàbān", meaning:"下班"},
+            {char:"新", pinyin:"xīn", meaning:"新"},
+            {char:"电脑", pinyin:"diànnǎo", meaning:"电脑"},
+            {char:"真", pinyin:"zhēn", meaning:"真"},
+            {char:"好看", pinyin:"hǎokàn", meaning:"好看"},
+            {char:"喜欢", pinyin:"xǐhuan", meaning:"喜欢"},
+            {char:"它", pinyin:"tā", meaning:"它"}
+        ];
+        let currentWordIndex = 0;
+        let vocabCorrect = 0;
+
+        function loadWord(){
+            if(currentWordIndex >= wordList.length){
+                document.getElementById("pinyinText").innerText = "✅ 全部词语练习完成！";
+                document.getElementById("meaningText").innerText = "";
+                return;
+            }
+            let w = wordList[currentWordIndex];
+            document.getElementById("pinyinText").innerText = "拼音：" + w.pinyin;
+            document.getElementById("meaningText").innerText = "意思：" + w.meaning;
+            document.getElementById("charInput").value = "";
+            document.getElementById("vocabFeedback").innerText = "";
+        }
+        function submitWord(){
+            if(currentWordIndex >= wordList.length) return;
+            let userAns = document.getElementById("charInput").value.trim();
+            let correctAns = wordList[currentWordIndex].char;
+            if(userAns === correctAns){
+                document.getElementById("vocabFeedback").innerText = "✅ 正确！";
+                document.getElementById("vocabFeedback").className = "result-text correct";
+                vocabCorrect++;
+            }else{
+                document.getElementById("vocabFeedback").innerText = "❌ 不对！正确答案："+correctAns;
+                document.getElementById("vocabFeedback").className = "result-text wrong";
+            }
+        }
+        function nextWord(){
+            currentWordIndex++;
+            loadWord();
+        }
+        function showVocabScore(){
+            let total = wordList.length;
+            document.getElementById("vocabScoreText").innerText = `词语分数：${vocabCorrect} / ${total}`;
+        }
+        loadWord();
+
+        // ========== READING MCQ ==========
+        function submitReading(){
+            let rCorrect = 0;
+            const q1 = document.querySelector('input[name="q1"]:checked');
+            const q2 = document.querySelector('input[name="q2"]:checked');
+            const q3 = document.querySelector('input[name="q3"]:checked');
+            if(q1?.value === "A") rCorrect++;
+            if(q2?.value === "B") rCorrect++;
+            if(q3?.value === "B") rCorrect++;
+            document.getElementById("readingScoreText").innerText = `阅读分数：${rCorrect} / 3`;
+        }
+
+        // ========== WRITING ==========
+        function submitWriting(){
+            let w1Ans = document.getElementById("w1Input").value.trim();
+            let w2Ans = document.getElementById("w2Input").value.trim();
+            let w3Ans = document.getElementById("w3Input").value.trim();
+            let sentenceText = document.getElementById("sentenceInput").value.trim();
+            let wScore = 0;
+            const ans1 = "星期日";
+            const ans2 = "休息";
+            const ans3 = "新";
+
+            if(w1Ans === ans1) wScore++;
+            if(w2Ans === ans2) wScore++;
+            if(w3Ans === ans3) wScore++;
+
+            let feedbackMsg = "";
+            feedbackMsg += `填空正确答案：第一题=${ans1}，第二题=${ans2}，第三题=${ans3}\n`;
+            if(sentenceText.includes("休息")){
+                feedbackMsg += "✅ 你的句子里有要求的词语【休息】！\n";
+            }else{
+                feedbackMsg += "❌ 你的句子里一定要写词语【休息】\n";
+            }
+            document.getElementById("writingScoreText").innerText = `填空写作分数：${wScore} / 3`;
+            document.getElementById("writingFeedbackText").innerText = feedbackMsg;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HSK1 Lesson 8 Practice</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            max-width: 720px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background-color: #f7f7f7;
+        }
+        .card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 6px #00000018;
+        }
+        h2 {
+            color: #b82626;
+        }
+        .mcq-option {
+            display: block;
+            margin: 0.8rem 0;
+            cursor: pointer;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 0.7rem;
+            margin: 0.5rem 0 1.2rem;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+        .btn-blue{
+            padding: 0.8rem 1.2rem;
+            border: none;
+            background-color: #2b78e4;
+            color: white;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin:0.4rem;
+        }
+        .btn-blue:hover {
+            background-color: #1d5fb8;
+        }
+        .result-text {
+            margin-top: 1rem;
+            font-weight: bold;
+            color: #1a8c35;
+        }
+        .feedback-wrong{
+            color:#d62828;
+            font-weight:bold;
+            margin-top:0.8rem;
+        }
+        hr {
+            margin: 2rem 0;
+        }
+        .word-info{
+            font-size:1.1rem;
+            margin:0.6rem 0;
+        }
+        .answer-feedback{
+            margin-top:1rem;
+            border-top:1px solid #ddd;
+            padding-top:1rem;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align:center;">HSK1 Lesson 8 Practice 我爸爸也在医院工作</h1>
+
+    <!-- 📝 WORD TYPING PRACTICE (Lesson 8 New Words from Book) -->
+    <div class="card">
+        <h2>Word Typing Practice (Exact Answer Check)</h2>
+        <div class="word-info">Pinyin: <span id="wordPinyin"></span></div>
+        <div class="word-info">Meaning: <span id="wordMeaning"></span></div>
+        <input id="vocabInput" placeholder="Type exact Chinese character here">
+        <p id="instantFeedback"></p>
+        <br>
+        <button type="button" class="btn-blue" onclick="submitWord()">Submit Word</button>
+        <button type="button" class="btn-blue" onclick="nextWord()">Next</button>
+        <br>
+        <button type="button" class="btn-blue" onclick="showVocabScore()">Show Final Vocabulary Score</button>
+        <p id="vocabResultText" class="result-text"></p>
+    </div>
+
+    <!-- 📖 Reading & MCQs (Dialogues from Book + Grammar MCQs add kiye hain) -->
+    <div class="card">
+        <h2>Reading & Grammar MCQs</h2>
+        <p><strong>Dialogue 1 (白家月 & 陈天中)</strong></p>
+        <p>白家月：房间外有一只小猫。<br>陈天中：我没看见，它在哪儿呢？<br>白家月：它在桌子下呢。<br>陈天中：这只小猫真漂亮！</p>
+        <br>
+        <p><strong>Q1：小猫在哪里？</strong></p>
+        <label class="mcq-option"><input type="radio" name="d1q1" value="A"> A. 桌子下</label>
+        <label class="mcq-option"><input type="radio" name="d1q1" value="B"> B. 房间里</label>
+        <label class="mcq-option"><input type="radio" name="d1q1" value="C"> C. 医院里</label>
+        <br>
+        <p><strong>Dialogue 2 (白家月 & 李文)</strong></p>
+        <p>白家月：我们在哪儿见呢？<br>李文：在学校书店前见吧。<br>白家月：好的。下午两点你能到吗？<br>李文：我能到。我在学校吃午饭。</p>
+        <br>
+        <p><strong>Q2：他们约好在哪里见？</strong></p>
+        <label class="mcq-option"><input type="radio" name="d2q1" value="A"> A. 学校书店前</label>
+        <label class="mcq-option"><input type="radio" name="d2q1" value="B"> B. 房间外</label>
+        <label class="mcq-option"><input type="radio" name="d2q1" value="C"> C. 桌子下</label>
+        <br>
+        <p><strong>Dialogue 3 (刘明 & 胡医生)</strong></p>
+        <p>刘明：小胡，还没吃饭呢？<br>胡医生：没吃呢。<br>刘明：大医院病人多，医生非常忙。<br>胡医生：是的。我爸爸也在医院工作，他也非常忙。<br>刘明：你家有两个医生？<br>胡医生：对。</p>
+        <br>
+        <p><strong>Q3：胡医生的爸爸在哪儿工作？</strong></p>
+        <label class="mcq-option"><input type="radio" name="d3q1" value="A"> A. 在医院</label>
+        <label class="mcq-option"><input type="radio" name="d3q1" value="B"> B. 在学校</label>
+        <label class="mcq-option"><input type="radio" name="d3q1" value="C"> C. 在书店</label>
+        <hr>
+        <h3>📚 Grammar MCQs (Lesson 8 Grammar: 在, 方位词, 能)</h3>
+        <p><strong>Q4：我______学校吃午饭。(correct preposition)</strong></p>
+        <label class="mcq-option"><input type="radio" name="gq1" value="A"> A. 在</label>
+        <label class="mcq-option"><input type="radio" name="gq1" value="B"> B. 能</label>
+        <label class="mcq-option"><input type="radio" name="gq1" value="C"> C. 下</label>
+
+        <p><strong>Q5：下午两点你______到吗？(modal verb 能)</strong></p>
+        <label class="mcq-option"><input type="radio" name="gq2" value="A"> A. 能</label>
+        <label class="mcq-option"><input type="radio" name="gq2" value="B"> B. 在</label>
+        <label class="mcq-option"><input type="radio" name="gq2" value="C"> C. 前</label>
+
+        <p><strong>Q6：桌子______有小猫。(positional word)</strong></p>
+        <label class="mcq-option"><input type="radio" name="gq3" value="A"> A. 下</label>
+        <label class="mcq-option"><input type="radio" name="gq3" value="B"> B. 外</label>
+        <label class="mcq-option"><input type="radio" name="gq3" value="C"> C. 前</label>
+
+        <br>
+        <button type="button" class="btn-blue" onclick="submitReading()">Submit MCQs</button>
+        <p id="readingScoreText" class="result-text"></p>
+        <div id="readingAnswerFeedback" class="answer-feedback"></div>
+    </div>
+
+    <!-- ✍️ Writing / Fill in blanks from book comprehensive exercise -->
+    <div class="card">
+        <h2>✍️ Writing Practice (Lesson 8 Fill in Blanks)</h2>
+        <p>Instructions: Fill in the blanks using words you learned in Lesson 8.</p>
+        <p>1. 胡医生的爸爸______医院工作。</p>
+        <input id="w1Input" placeholder="Write Chinese character(s)">
+
+        <p>2. 我下午两点______到学校。</p>
+        <input id="w2Input" placeholder="Write Chinese character(s)">
+
+        <p>3. 小猫在桌子______。</p>
+        <input id="w3Input" placeholder="Write Chinese character(s)">
+
+        <p>4. 我们去______，你去吗？</p>
+        <input id="w4Input" placeholder="Write Chinese character(s)">
+
+        <br>
+        <button type="button" class="btn-blue" onclick="submitWriting()">Submit Writing</button>
+        <p id="writingScoreText" class="result-text"></p>
+        <div id="writingAnswerFeedback" class="answer-feedback"></div>
+    </div>
+
+    <script>
+        // ✅ WORD TYPING PRACTICE (Lesson 8 New Words from your book screenshot)
+        const vocabList = [
+            {char:"房间", pinyin:"fángjiān", meaning:"room"},
+            {char:"外", pinyin:"wài", meaning:"outside"},
+            {char:"只", pinyin:"zhī", meaning:"measure word for animals"},
+            {char:"小", pinyin:"xiǎo", meaning:"small; little"},
+            {char:"猫", pinyin:"māo", meaning:"cat"},
+            {char:"没", pinyin:"méi", meaning:"no; not; not yet"},
+            {char:"看见", pinyin:"kànjiàn", meaning:"see; catch sight of"},
+            {char:"桌子", pinyin:"zhuōzi", meaning:"table; desk"},
+            {char:"下", pinyin:"xià", meaning:"low position / down"},
+            {char:"漂亮", pinyin:"piàoliang", meaning:"pretty; beautiful"},
+            {char:"在", pinyin:"zài", meaning:"at / in"},
+            {char:"学校", pinyin:"xuéxiào", meaning:"school"},
+            {char:"书店", pinyin:"shūdiàn", meaning:"bookstore"},
+            {char:"前", pinyin:"qián", meaning:"front"},
+            {char:"能", pinyin:"néng", meaning:"can; be able to"},
+            {char:"到", pinyin:"dào", meaning:"arrive; reach"},
+            {char:"午饭", pinyin:"wǔfàn", meaning:"lunch"},
+            {char:"饭", pinyin:"fàn", meaning:"meal"},
+            {char:"大", pinyin:"dà", meaning:"big; large"},
+            {char:"病人", pinyin:"bìngrén", meaning:"patient"},
+            {char:"多", pinyin:"duō", meaning:"many; much"},
+            {char:"医生", pinyin:"yīshēng", meaning:"doctor"},
+            {char:"工作", pinyin:"gōngzuò", meaning:"work"}
+        ];
+        let currentWordIndex = 0;
+        let vocabScore = 0;
+        let answeredIndex = [];
+
+        function loadWord(){
+            const word = vocabList[currentWordIndex];
+            document.getElementById("wordPinyin").innerText = word.pinyin;
+            document.getElementById("wordMeaning").innerText = word.meaning;
+            document.getElementById("vocabInput").value = "";
+            document.getElementById("instantFeedback").innerText = "";
+        }
+        function submitWord(){
+            if(answeredIndex.includes(currentWordIndex)){
+                document.getElementById("instantFeedback").innerText = "✅ Tum is word ko already check kar chuke ho, Next par jao.";
+                return;
+            }
+            const userAns = document.getElementById("vocabInput").value.trim();
+            const correctAns = vocabList[currentWordIndex].char;
+            answeredIndex.push(currentWordIndex);
+
+            if(userAns === correctAns){
+                vocabScore++;
+                document.getElementById("instantFeedback").innerText = "✅ Sahi!";
+                document.getElementById("instantFeedback").style.color="#1a8c35";
+            }else{
+                document.getElementById("instantFeedback").innerText = `❌ Ghalat! Sahi jawab: ${correctAns}`;
+                document.getElementById("instantFeedback").style.color="#d62828";
+            }
+        }
+        function nextWord(){
+            if(currentWordIndex < vocabList.length - 1){
+                currentWordIndex++;
+                loadWord();
+            }
+        }
+        function showVocabScore(){
+            document.getElementById("vocabResultText").innerText = `📝 Vocabulary Score: ${vocabScore}/${vocabList.length}`;
+        }
+        loadWord();
+
+        // ✅ READING + GRAMMAR MCQ + SHOW CORRECT ANSWERS AFTER SUBMIT
+        function submitReading(){
+            let score = 0;
+            const ans = {
+                d1q1:{val:"A", text:"A. 桌子下"},
+                d2q1:{val:"A", text:"A. 学校书店前"},
+                d3q1:{val:"A", text:"A. 在医院"},
+                gq1:{val:"A", text:"A. 在"},
+                gq2:{val:"A", text:"A. 能"},
+                gq3:{val:"A", text:"A. 下"}
+            }
+            const total = Object.keys(ans).length;
+            let feedbackHtml = "<strong>✅ / ❌ Jawabat:</strong><br>";
+            for(let key in ans){
+                let selected = document.querySelector(`input[name="${key}"]:checked`);
+                if(selected && selected.value === ans[key].val){
+                    score++;
+                    feedbackHtml += `${key}: ✅ ${ans[key].text}<br>`;
+                }else{
+                    feedbackHtml += `${key}: ❌ Sahi jawab → ${ans[key].text}<br>`;
+                }
+            }
+            document.getElementById("readingScoreText").innerText = `📖 Reading & Grammar Score: ${score}/${total}`;
+            document.getElementById("readingAnswerFeedback").innerHTML = feedbackHtml;
+        }
+
+        // ✅ WRITING + SHOW CORRECT ANSWERS AFTER SUBMIT
+        function submitWriting(){
+            let score = 0;
+            const correct = {
+                w1Input:{ans:"在", q:"1. 胡医生的爸爸______医院工作。"},
+                w2Input:{ans:"能", q:"2. 我下午两点______到学校。"},
+                w3Input:{ans:"下", q:"3. 小猫在桌子______。"},
+                w4Input:{ans:"书店", q:"4. 我们去______，你去吗？"}
+            }
+            const total = Object.keys(correct).length;
+            let feedbackHtml = "<strong>✅ / ❌ Jawabat:</strong><br>";
+            for(let key in correct){
+                let val = document.getElementById(key).value.trim();
+                if(val === correct[key].ans){
+                    score++;
+                    feedbackHtml += `${correct[key].q} ✅ ${correct[key].ans}<br>`;
+                }else{
+                    feedbackHtml += `${correct[key].q} ❌ Sahi jawab → ${correct[key].ans}<br>`;
+                }
+            }
+            document.getElementById("writingScoreText").innerText = `✍️ Writing Score: ${score}/${total}`;
+            document.getElementById("writingAnswerFeedback").innerHTML = feedbackHtml;
+        }
+    </script>
+</body>
+</html>

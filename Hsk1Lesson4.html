@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HSK 1 Lesson 4 Practice | 我有两个孩子 Self Study Exercises</title>
+    <meta name="description" content="Free HSK1 Lesson4 self-study practice page, vocabulary typing practice, reading MCQs & writing exercises for new HSK learners.">
+    <style>
+        body{font-family:Arial, sans-serif; max-width:900px; margin:20px auto; padding:0 16px; background:#ffffff;}
+        .card{background:#fff; border-radius:12px; padding:24px; margin-bottom:24px; box-shadow:0 1px 5px #0000001a;}
+        h1{font-size:28px;}
+        h2{color:#c82423; display:flex; align-items:center; gap:8px; font-size:22px;}
+        input{width:100%; padding:14px; font-size:18px; box-sizing:border-box; border:1px solid #ccc; border-radius:8px; margin:12px 0;}
+        button{padding:14px; background:#1976D2; color:white; font-size:18px; border:none; border-radius:8px; margin-top:12px; margin-right:8px;}
+        .btn-row{display:flex; gap:8px; flex-wrap:wrap;}
+        .result-box{margin-top:16px; padding:16px; background:#f0f0f0; border-radius:8px;}
+    </style>
+</head>
+<body>
+    <h1>HSK 1 Lesson 4 Practice Page 我有两个孩子</h1>
+
+    <!-- ✅ Word Typing Practice -->
+    <div class="card">
+        <h2>✍️ Word Typing Practice (Exact Answer Check)</h2>
+        <div id="wordBox">
+            <p>Pinyin: <span id="pinyin">yǒu</span></p>
+            <p>Meaning: <span id="meaning">have</span></p>
+            <input type="text" id="wordInput" placeholder="Type exact Chinese character here">
+            <div class="btn-row">
+                <button onclick="submitWord()">Submit Word</button>
+                <button onclick="nextWord()">Next</button>
+                <button onclick="showFinalScore()">Show Final Vocabulary Score</button>
+            </div>
+            <div id="wordResult" class="result-box"></div>
+            <div id="finalWordScore" class="result-box"></div>
+        </div>
+    </div>
+
+    <!-- 📖 Reading & MCQs -->
+    <div class="card">
+        <h2>📖 Reading & MCQs</h2>
+        <p>Dialogue 1: At home, Liu Ming and Wang Yixue were chatting. Liu Ming asks if Yifei is busy and how many students she has. Wang Yixue tells him she is very busy and she has twenty students.</p>
+        <p>Dialogue 2: Wang Yixue says: Wǒ yǒu liǎng gè gēge, nǐ ne? (我有两个哥哥，你呢?). Yang Tongle replies he doesn’t have any elder brothers. Then Wang Yixue asks “Nǐ jiā yǒu jǐ kǒu rén? (你家有几口人?)”. Yang Tongle answers there are four people in his family: father, mother, younger sister and himself.</p>
+        <p>Dialogue3: On the street, Yang Tongle meets Wang Yixue with her son. He asks if this is her son. Wang Yixue says yes, she has two children, one son and one daughter. Her son is five years old this year and her daughter is twelve.</p>
+        <br>
+        <p>1. How many people are there in Yang Tongle’s family?</p>
+        <input type="radio" name="q1" value="A"> A. 四口人 (sì kǒu rén)<br>
+        <input type="radio" name="q1" value="B"> B. 三口人 (sān kǒu rén)<br>
+        <br>
+        <p>2. Wang Yixue’s daughter is ____ this year.</p>
+        <input type="radio" name="q2" value="A"> A. 十二 (shí'èr)<br>
+        <input type="radio" name="q2" value="B"> B. 五 (wǔ)<br>
+        <br>
+        <p>3. Which particle is used to ask back “What about you?” at end of sentence?</p>
+        <input type="radio" name="q3" value="A"> A. 呢 (ne)<br>
+        <input type="radio" name="q3" value="B"> B. 吗 (ma)<br>
+
+        <button onclick="submitMcq()">Submit MCQs</button>
+        <div id="mcqResult" class="result-box"></div>
+    </div>
+
+    <!-- ✏️ Writing Practice -->
+    <div class="card">
+        <h2>✏️ Writing Practice</h2>
+        <p>Fill in blanks with words you learned:</p>
+        <p>1. Wǒ ____ liǎng gè gēge. (I have two elder brothers) </p>
+        <input type="text" id="w1" placeholder="Write here">
+        <p>2. Wǒ ____ gēge. (I don’t have elder brothers)</p>
+        <input type="text" id="w2" placeholder="Write here">
+        <p>Make one simple sentence with the word 孩子 (háizi):</p>
+        <input type="text" id="w3" placeholder="Write your sentence (must include 孩子)">
+
+        <button onclick="submitWriting()">Submit Writing</button>
+        <div id="writingResult" class="result-box"></div>
+    </div>
+
+    <script>
+        // Word Typing Data (Lesson 4 New Words directly from your book)
+        const wordList = [
+            {pinyin:"yǒu", meaning:"have", char:"有"},
+            {pinyin:"duōshao", meaning:"how many/much", char:"多少"},
+            {pinyin:"gè", meaning:"general measure word", char:"个"},
+            {pinyin:"gēge", meaning:"elder brother", char:"哥哥"},
+            {pinyin:"ne", meaning:"particle used at end of question", char:"呢"},
+            {pinyin:"méiyǒu", meaning:"not have", char:"没有"},
+            {pinyin:"jiā", meaning:"family / home", char:"家"},
+            {pinyin:"jǐ", meaning:"how many", char:"几"},
+            {pinyin:"kǒu", meaning:"measure word for family members", char:"口"},
+            {pinyin:"bàba", meaning:"father / dad", char:"爸爸"},
+            {pinyin:"māma", meaning:"mother / mom", char:"妈妈"},
+            {pinyin:"mèimei", meaning:"younger sister", char:"妹妹"},
+            {pinyin:"hé", meaning:"and", char:"和"},
+            {pinyin:"érzi", meaning:"son", char:"儿子"},
+            {pinyin:"háizi", meaning:"child / children", char:"孩子"},
+            {pinyin:"nǚ'ér", meaning:"daughter", char:"女儿"},
+            {pinyin:"suì", meaning:"year (of age)", char:"岁"},
+            {pinyin:"tā", meaning:"he / him", char:"他"},
+            {pinyin:"jīnnián", meaning:"this year", char:"今年"},
+            {pinyin:"duō", meaning:"how / to what extent", char:"多"},
+            {pinyin:"dà", meaning:"(of age) old", char:"大"},
+        ];
+        let currentWord = 0;
+        let vocabScore = 0;
+
+        function submitWord(){
+            let userAns = document.getElementById("wordInput").value.trim();
+            let correctAns = wordList[currentWord].char;
+            let feed = "";
+            if(userAns === correctAns){
+                vocabScore++;
+                feed = `✅ Correct! <br>The correct character: ${correctAns}`;
+            }else{
+                feed = `❌ Wrong! <br>The correct character: ${correctAns}`;
+            }
+            document.getElementById("wordResult").innerHTML = feed;
+        }
+
+        function nextWord(){
+            currentWord++;
+            if(currentWord >= wordList.length){
+                currentWord = 0;
+            }
+            document.getElementById("pinyin").innerText = wordList[currentWord].pinyin;
+            document.getElementById("meaning").innerText = wordList[currentWord].meaning;
+            document.getElementById("wordInput").value = "";
+            document.getElementById("wordResult").innerHTML = "";
+        }
+
+        // Final overall score function
+        function showFinalScore(){
+            document.getElementById("finalWordScore").innerHTML = `<strong>🎉 Final Vocabulary Score: ${vocabScore}/${wordList.length}</strong>`;
+        }
+
+        // MCQ Check
+        function submitMcq(){
+            let score = 0;
+            let feed = "";
+            let q1 = document.querySelector('input[name="q1"]:checked')?.value;
+            let q2 = document.querySelector('input[name="q2"]:checked')?.value;
+            let q3 = document.querySelector('input[name="q3"]:checked')?.value;
+            if(q1==="A"){score++; feed += "✅ Q1 Correct<br>"}else{feed += "❌ Q1 Answer: A. 四口人 (sì kǒu rén)<br>"}
+            if(q2==="A"){score++; feed += "✅ Q2 Correct<br>"}else{feed += "❌ Q2 Answer: A. 十二 (shí'èr)<br>"}
+            if(q3==="A"){score++; feed += "✅ Q3 Correct<br>"}else{feed += "❌ Q3 Answer: A. 呢 (ne)<br>"}
+            feed += `<br><strong>MCQ Score: ${score}/3</strong>`;
+            document.getElementById("mcqResult").innerHTML = feed;
+        }
+
+        // Writing Submit & Check Function
+        function submitWriting(){
+            let w1Ans = document.getElementById("w1").value.trim();
+            let w2Ans = document.getElementById("w2").value.trim();
+            let w3Ans = document.getElementById("w3").value.trim();
+            let score = 0;
+            let feed = "";
+
+            if(w1Ans === "有"){
+                score++;
+                feed += "✅ Q1 Correct<br>";
+            }else{
+                feed += "❌ Q1 Correct Answer: 有<br>";
+            }
+            if(w2Ans === "没有"){
+                score++;
+                feed += "✅ Q2 Correct<br>";
+            }else{
+                feed += "❌ Q2 Correct Answer: 没有<br>";
+            }
+            if(w3Ans.includes("孩子")){
+                score++;
+                feed += "✅ Q3 Correct (Your sentence includes required word 孩子)<br>";
+            }else{
+                feed += "❌ Q3: Please write a sentence that must include 孩子<br>";
+            }
+            feed += `<br><strong>Writing Score: ${score}/3</strong>`;
+            document.getElementById("writingResult").innerHTML = feed;
+        }
+    </script>
+</body>
+</html>

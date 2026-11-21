@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HSK1 Lesson 7 Practice</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            max-width: 720px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background-color: #f7f7f7;
+        }
+        .card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 6px #00000018;
+        }
+        h2 {
+            color: #b82626;
+        }
+        .mcq-option {
+            display: block;
+            margin: 0.8rem 0;
+            cursor: pointer;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 0.7rem;
+            margin: 0.5rem 0 1.2rem;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+        .btn-blue{
+            padding: 0.8rem 1.2rem;
+            border: none;
+            background-color: #2b78e4;
+            color: white;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin:0.4rem;
+        }
+        .btn-blue:hover {
+            background-color: #1d5fb8;
+        }
+        .result-text {
+            margin-top: 1rem;
+            font-weight: bold;
+            color: #1a8c35;
+        }
+        .feedback-wrong{
+            color:#d62828;
+            font-weight:bold;
+            margin-top:0.8rem;
+        }
+        hr {
+            margin: 2rem 0;
+        }
+        .word-info{
+            font-size:1.1rem;
+            margin:0.6rem 0;
+        }
+        .answer-feedback{
+            margin-top:1rem;
+            border-top:1px solid #ddd;
+            padding-top:1rem;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align:center;">HSK1 Lesson 7 Practice</h1>
+
+    <!-- 📝 WORD TYPING PRACTICE -->
+    <div class="card">
+        <h2>Word Typing Practice (Exact Answer Check)</h2>
+        <div class="word-info">Pinyin: <span id="wordPinyin"></span></div>
+        <div class="word-info">Meaning: <span id="wordMeaning"></span></div>
+        <input id="vocabInput" placeholder="Type exact Chinese character here">
+        <p id="instantFeedback"></p>
+        <br>
+        <button type="button" class="btn-blue" onclick="submitWord()">Submit Word</button>
+        <button type="button" class="btn-blue" onclick="nextWord()">Next</button>
+        <br>
+        <button type="button" class="btn-blue" onclick="showVocabScore()">Show Final Vocabulary Score</button>
+        <p id="vocabResultText" class="result-text"></p>
+    </div>
+
+    <!-- 📖 Reading & MCQs -->
+    <div class="card">
+        <h2>Reading & MCQs</h2>
+        <p><strong>Dialogue 1 (白家月 & 安妮)</strong></p>
+        <p>白家月：现在几点？<br>安妮：早上八点四十。<br>白家月：我上午十点十分有课。<br>安妮：好的，我们下午两点见吧。</p>
+        <br>
+        <p><strong>Questions for Dialogue 1</strong></p>
+        <p>Q1：白家月问安妮什么？</p>
+        <label class="mcq-option"><input type="radio" name="d1q1" value="C"> C. 下午去哪儿</label>
+        <label class="mcq-option"><input type="radio" name="d1q1" value="B"> B. 你有没有课</label>
+        <label class="mcq-option"><input type="radio" name="d1q1" value="A"> A. 现在几点</label>
+
+        <p><strong>Q2：安妮说现在是几点？</strong></p>
+        <label class="mcq-option"><input type="radio" name="d1q2" value="C"> C. 下午两点</label>
+        <label class="mcq-option"><input type="radio" name="d1q2" value="B"> B. 上午十点十分</label>
+        <label class="mcq-option"><input type="radio" name="d1q2" value="A"> A. 早上八点四十</label>
+
+        <p><strong>Q3：白家月上午十点十分有什么？</strong></p>
+        <label class="mcq-option"><input type="radio" name="d1q3" value="C"> C. 有事</label>
+        <label class="mcq-option"><input type="radio" name="d1q3" value="B"> B. 有电影</label>
+        <label class="mcq-option"><input type="radio" name="d1q3" value="A"> A. 有课</label>
+
+        <p><strong>Q4：她们约好什么时候见？</strong></p>
+        <label class="mcq-option"><input type="radio" name="d1q4" value="C"> C. 上午十点十分</label>
+        <label class="mcq-option"><input type="radio" name="d1q4" value="B"> B. 早上八点四十</label>
+        <label class="mcq-option"><input type="radio" name="d1q4" value="A"> A. 下午两点</label>
+        <hr>
+        <p><strong>Dialogue 2 (李文 & 白家月)</strong></p>
+        <p>李文：下午我想去电影院看电影，你去吗？<br>白家月：我不想去，下午还有事。<br>李文：好的。明天呢？<br>白家月：我明天下午两点还上课呢，四点半下课。</p>
+        <br>
+        <p><strong>Questions for Dialogue 2</strong></p>
+        <p>Q5：李文下午想去哪儿？</p>
+        <label class="mcq-option"><input type="radio" name="d2q1" value="C"> C. 学校</label>
+        <label class="mcq-option"><input type="radio" name="d2q1" value="B"> B. 医院</label>
+        <label class="mcq-option"><input type="radio" name="d2q1" value="A"> A. 电影院</label>
+
+        <p><strong>Q6：白家月下午想去吗？</strong></p>
+        <label class="mcq-option"><input type="radio" name="d2q2" value="C"> C. 不知道</label>
+        <label class="mcq-option"><input type="radio" name="d2q2" value="B"> B. 想去</label>
+        <label class="mcq-option"><input type="radio" name="d2q2" value="A"> A. 不想去</label>
+        <hr>
+        <p><strong>Dialogue 3 (王一雪 & 刘明)</strong></p>
+        <p>王一雪：喂，你在哪儿呢？<br>刘明：我在家里呢。<br>王一雪：我晚上六点半下班。<br>刘明：我八点去医院上班。<br>王一雪：好的，你去店里买些菜吧。<br>刘明：好，我十分钟后去。</p>
+        <br>
+        <p><strong>Questions for Dialogue 3</strong></p>
+        <p>Q7：刘明现在在哪里？</p>
+        <label class="mcq-option"><input type="radio" name="d3q1" value="B"> B. 医院</label>
+        <label class="mcq-option"><input type="radio" name="d3q1" value="C"> C. 店里</label>
+        <label class="mcq-option"><input type="radio" name="d3q1" value="A"> A. 家里</label>
+
+        <p><strong>Q8：刘明什么时候去医院上班？</strong></p>
+        <label class="mcq-option"><input type="radio" name="d3q2" value="B"> B. 六点半</label>
+        <label class="mcq-option"><input type="radio" name="d3q2" value="C"> C. 十分钟后</label>
+        <label class="mcq-option"><input type="radio" name="d3q2" value="A"> A. 八点</label>
+
+        <br>
+        <button type="button" class="btn-blue" onclick="submitReading()">Submit MCQs</button>
+        <p id="readingScoreText" class="result-text"></p>
+        <div id="readingAnswerFeedback" class="answer-feedback"></div>
+    </div>
+
+    <!-- ✍️ Writing Practice -->
+    <div class="card">
+        <h2>✍️ Writing Practice (Lesson 7)</h2>
+        <p>Instructions: Fill in the blanks using words you learned in Lesson 7. Write Chinese characters.</p>
+        <p>1. 我上午十点十分有______。</p>
+        <input id="w1Input" placeholder="Write Chinese character(s)">
+
+        <p>2. 我们下午两点______吧。</p>
+        <input id="w2Input" placeholder="Write Chinese character(s)">
+
+        <p>3. 我想去电影院看______。</p>
+        <input id="w3Input" placeholder="Write Chinese character(s)">
+
+        <p>4. 我______五点下课。</p>
+        <input id="w4Input" placeholder="Write Chinese character(s)">
+
+        <p>5. 我______家里呢。</p>
+        <input id="w5Input" placeholder="Write Chinese character(s)">
+
+        <p>6. Make one simple sentence with the word <strong>电影院</strong>. Your sentence must include 电影院.</p>
+        <textarea id="sentenceInput" rows="3" placeholder="Write your Chinese sentence"></textarea>
+
+        <br>
+        <button type="button" class="btn-blue" onclick="submitWriting()">Submit Writing</button>
+        <p id="writingScoreText" class="result-text"></p>
+        <div id="writingAnswerFeedback" class="answer-feedback"></div>
+    </div>
+
+    <script>
+        // ✅ WORD TYPING PRACTICE
+        const vocabList = [
+            {char:"现在", pinyin:"xiànzài", meaning:"now"},
+            {char:"点", pinyin:"diǎn", meaning:"o'clock / point"},
+            {char:"早上", pinyin:"zǎoshang", meaning:"(early) morning"},
+            {char:"上午", pinyin:"shàngwǔ", meaning:"morning"},
+            {char:"分", pinyin:"fēn", meaning:"minute"},
+            {char:"课", pinyin:"kè", meaning:"class; lesson"},
+            {char:"下午", pinyin:"xiàwǔ", meaning:"afternoon"},
+            {char:"见", pinyin:"jiàn", meaning:"meet"},
+            {char:"吧", pinyin:"ba", meaning:"(particle for suggestion)"},
+            {char:"电影院", pinyin:"diànyǐngyuàn", meaning:"cinema"},
+            {char:"看", pinyin:"kàn", meaning:"watch; see; read"},
+            {char:"电影", pinyin:"diànyǐng", meaning:"movie; film"},
+            {char:"事", pinyin:"shì", meaning:"thing; affair"},
+            {char:"上课", pinyin:"shàngkè", meaning:"attend a class"},
+            {char:"呢", pinyin:"ne", meaning:"(sentence marker particle)"},
+            {char:"半", pinyin:"bàn", meaning:"half"},
+            {char:"下课", pinyin:"xiàkè", meaning:"dismiss a class"},
+            {char:"在", pinyin:"zài", meaning:"be at/in/on"},
+            {char:"家", pinyin:"jiā", meaning:"home"},
+            {char:"里", pinyin:"lǐ", meaning:"inner; inside"},
+            {char:"晚上", pinyin:"wǎnshang", meaning:"evening"},
+            {char:"医院", pinyin:"yīyuàn", meaning:"hospital"},
+            {char:"上班", pinyin:"shàngbān", meaning:"go to work"},
+            {char:"店", pinyin:"diàn", meaning:"shop; store"},
+            {char:"菜", pinyin:"cài", meaning:"vegetables"},
+            {char:"分钟", pinyin:"fēnzhōng", meaning:"minute"},
+            {char:"后", pinyin:"hòu", meaning:"after; later"}
+        ];
+        let currentWordIndex = 0;
+        let vocabScore = 0;
+        let answeredIndex = [];
+
+        function loadWord(){
+            const word = vocabList[currentWordIndex];
+            document.getElementById("wordPinyin").innerText = word.pinyin;
+            document.getElementById("wordMeaning").innerText = word.meaning;
+            document.getElementById("vocabInput").value = "";
+            document.getElementById("instantFeedback").innerText = "";
+        }
+        function submitWord(){
+            if(answeredIndex.includes(currentWordIndex)){
+                document.getElementById("instantFeedback").innerText = "✅ Tum is word ko already check kar chuke ho, Next par jao.";
+                return;
+            }
+            const userAns = document.getElementById("vocabInput").value.trim();
+            const correctAns = vocabList[currentWordIndex].char;
+            answeredIndex.push(currentWordIndex);
+
+            if(userAns === correctAns){
+                vocabScore++;
+                document.getElementById("instantFeedback").innerText = "✅ Sahi!";
+                document.getElementById("instantFeedback").style.color="#1a8c35";
+            }else{
+                document.getElementById("instantFeedback").innerText = `❌ Ghalat! Sahi jawab: ${correctAns}`;
+                document.getElementById("instantFeedback").style.color="#d62828";
+            }
+        }
+        function nextWord(){
+            if(currentWordIndex < vocabList.length - 1){
+                currentWordIndex++;
+                loadWord();
+            }
+        }
+        function showVocabScore(){
+            document.getElementById("vocabResultText").innerText = `📝 Vocabulary Score: ${vocabScore}/${vocabList.length}`;
+        }
+        loadWord();
+
+        // ✅ READING MCQ + SHOW CORRECT ANSWERS AFTER SUBMIT
+        function submitReading(){
+            let score = 0;
+            const ans = {
+                d1q1:{val:"A", text:"A. 现在几点"},
+                d1q2:{val:"A", text:"A. 早上八点四十"},
+                d1q3:{val:"A", text:"A. 有课"},
+                d1q4:{val:"A", text:"A. 下午两点"},
+                d2q1:{val:"A", text:"A. 电影院"},
+                d2q2:{val:"A", text:"A. 不想去"},
+                d3q1:{val:"A", text:"A. 家里"},
+                d3q2:{val:"A", text:"A. 八点"}
+            }
+            const total = Object.keys(ans).length;
+            let feedbackHtml = "<strong>✅ / ❌ Jawabat:</strong><br>";
+            for(let key in ans){
+                let selected = document.querySelector(`input[name="${key}"]:checked`);
+                if(selected && selected.value === ans[key].val){
+                    score++;
+                    feedbackHtml += `${key}: ✅ ${ans[key].text}<br>`;
+                }else{
+                    feedbackHtml += `${key}: ❌ Sahi jawab → ${ans[key].text}<br>`;
+                }
+            }
+            document.getElementById("readingScoreText").innerText = `📖 Reading Score: ${score}/${total}`;
+            document.getElementById("readingAnswerFeedback").innerHTML = feedbackHtml;
+        }
+
+        // ✅ WRITING + SHOW CORRECT ANSWERS AFTER SUBMIT
+        function submitWriting(){
+            let score = 0;
+            const correct = {
+                w1Input:{ans:"课", q:"1. 我上午十点十分有______。"},
+                w2Input:{ans:"见", q:"2. 我们下午两点______吧。"},
+                w3Input:{ans:"电影", q:"3. 我想去电影院看______。"},
+                w4Input:{ans:"半", q:"4. 我______五点下课。"}
+            }
+            const total = Object.keys(correct).length;
+            let feedbackHtml = "<strong>✅ / ❌ Jawabat:</strong><br>";
+            for(let key in correct){
+                let val = document.getElementById(key).value.trim();
+                if(val === correct[key].ans){
+                    score++;
+                    feedbackHtml += `${correct[key].q} ✅ ${correct[key].ans}<br>`;
+                }else{
+                    feedbackHtml += `${correct[key].q} ❌ Sahi jawab → ${correct[key].ans}<br>`;
+                }
+            }
+            document.getElementById("writingScoreText").innerText = `✍️ Writing Score: ${score}/${total}`;
+            document.getElementById("writingAnswerFeedback").innerHTML = feedbackHtml;
+        }
+    </script>
+</body>
+</html>

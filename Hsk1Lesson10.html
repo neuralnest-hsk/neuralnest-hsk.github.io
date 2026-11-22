@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HSK1 Lesson 10 Practice</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            max-width: 720px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background-color: #f7f7f7;
+        }
+        .card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 6px #00000018;
+        }
+        h2 {
+            color: #b82626;
+        }
+        .mcq-option {
+            display: block;
+            margin: 0.8rem 0;
+            cursor: pointer;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 0.7rem;
+            margin: 0.5rem 0 1.2rem;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+        .btn-blue{
+            padding: 0.8rem 1.2rem;
+            border: none;
+            background-color: #2b78e4;
+            color: white;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin:0.4rem;
+        }
+        .btn-blue:hover {
+            background-color: #1d5fb8;
+        }
+        .result-text {
+            margin-top: 1rem;
+            font-weight: bold;
+            color: #1a8c35;
+        }
+        hr {
+            margin: 2rem 0;
+        }
+        .word-info{
+            font-size:1.1rem;
+            margin:0.6rem 0;
+        }
+        .answer-feedback{
+            margin-top:1rem;
+            border-top:1px solid #ddd;
+            padding-top:1rem;
+        }
+        .hsk-paragraph{
+            background-color:#f0f6ff;
+            padding:1rem;
+            border-radius:8px;
+            margin:1rem 0;
+            line-height:1.7;
+        }
+        .q-heading{
+            font-weight:bold;
+            margin-top:1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align:center;">HSK1 Lesson 10 Practice 这儿的苹果真便宜！</h1>
+
+    <!-- 📝 WORD TYPING PRACTICE (Same old working system, NO CHANGE IN LOGIC) -->
+    <div class="card">
+        <h2>Word Typing Practice (Exact Answer Check)</h2>
+        <div class="word-info">Pinyin: <span id="wordPinyin"></span></div>
+        <div class="word-info">Meaning: <span id="wordMeaning"></span></div>
+        <input id="vocabInput" placeholder="Type exact Chinese character here">
+        <p id="instantFeedback"></p>
+        <br>
+        <button type="button" class="btn-blue" onclick="submitWord()">Submit Word</button>
+        <button type="button" class="btn-blue" onclick="nextWord()">Next</button>
+        <br>
+        <button type="button" class="btn-blue" onclick="showVocabScore()">Show Final Vocabulary Score</button>
+        <p id="vocabResultText" class="result-text"></p>
+    </div>
+
+    <!-- 📖 READING ✨ HSK Exam Style -->
+    <div class="card">
+        <h2>📖 HSK Style Reading & Grammar MCQs</h2>
+        <p class="q-heading">Read the paragraph and answer Q1-Q3</p>
+        <div class="hsk-paragraph">
+            王一雪在小店买杯子，杯子五块钱一个。她还想买两斤苹果，苹果三块五一斤，这儿的苹果真便宜。这家商店衣服很多，一件衣服一百元，很好看，也不贵。男孩子的衣服在那儿。
+        </div>
+        <p><strong>Q1：一个杯子多少钱？</strong></p>
+        <label class="mcq-option"><input type="radio" name="rq1" value="A"> A. 五块钱</label>
+        <label class="mcq-option"><input type="radio" name="rq1" value="B"> B. 三块五</label>
+        <label class="mcq-option"><input type="radio" name="rq1" value="C"> C. 一百元</label>
+
+        <p><strong>Q2：王一雪觉得这儿的苹果怎么样？</strong></p>
+        <label class="mcq-option"><input type="radio" name="rq2" value="A"> A. 真便宜</label>
+        <label class="mcq-option"><input type="radio" name="rq2" value="B"> B. 很贵</label>
+        <label class="mcq-option"><input type="radio" name="rq2" value="C"> C. 不好看</label>
+
+        <p><strong>Q3：男孩子的衣服在哪里？</strong></p>
+        <label class="mcq-option"><input type="radio" name="rq3" value="A"> A. 在那儿</label>
+        <label class="mcq-option"><input type="radio" name="rq3" value="B"> B. 在这儿</label>
+        <label class="mcq-option"><input type="radio" name="rq3" value="C"> C. 在家里</label>
+
+        <hr>
+        <p class="q-heading">📚 Grammar MCQs (Lesson 10 Grammar)</p>
+        <p><strong>Q4：这件衣服一百元，____？(Ask opinion: 怎么样)</strong></p>
+        <label class="mcq-option"><input type="radio" name="gq1" value="A"> A. 怎么样</label>
+        <label class="mcq-option"><input type="radio" name="gq1" value="B"> B. 便宜</label>
+        <label class="mcq-option"><input type="radio" name="gq1" value="C"> C. 块</label>
+
+        <p><strong>Q5：这儿的水果真____！(Adjective predicate sentence)</strong></p>
+        <label class="mcq-option"><input type="radio" name="gq2" value="A"> A. 不少</label>
+        <label class="mcq-option"><input type="radio" name="gq2" value="B"> B. 买</label>
+        <label class="mcq-option"><input type="radio" name="gq2" value="C"> C. 学</label>
+
+        <p><strong>Q6：苹果三块五____一斤。(Money unit)</strong></p>
+        <label class="mcq-option"><input type="radio" name="gq3" value="A"> A. 块</label>
+        <label class="mcq-option"><input type="radio" name="gq3" value="B"> B. 元钱</label>
+        <label class="mcq-option"><input type="radio" name="gq3" value="C"> C. 件</label>
+
+        <br>
+        <button type="button" class="btn-blue" onclick="submitReading()">Submit MCQs</button>
+        <p id="readingScoreText" class="result-text"></p>
+        <div id="readingAnswerFeedback" class="answer-feedback"></div>
+    </div>
+
+    <!-- ✍️ ✨ WRITING PART (UPGRADED REAL HSK1 LEVEL, MULTIPLE TASKS ADDED) -->
+    <div class="card">
+        <h2>✍️ HSK Style Writing Practice</h2>
+        <p>Instructions: Complete ALL three tasks carefully (New HSK1 exam style questions)</p>
+
+        <p><strong>Task 1: Fill in the blanks</strong></p>
+        <p>1. 这儿的苹果真____！</p>
+        <input id="w1Input" placeholder="Write Chinese character(s)">
+        <p>2. 这个杯子五____钱一个。</p>
+        <input id="w2Input" placeholder="Write Chinese character(s)">
+
+        <p><strong>Task 2: Word rearrangement (Very important HSK1 question type! Make a correct sentence)</strong></p>
+        <p>Words: 这件 / 怎么样 / 衣服 / ?</p>
+        <input id="w3Input" placeholder="Write full correct Chinese sentence">
+
+        <p><strong>Task 3: Write your own simple sentence (Use word: 便宜)</strong></p>
+        <textarea id="sentenceInput" rows="3" placeholder="Write your simple Chinese sentence"></textarea>
+        <p style="font-size:0.9em;color:#444;">💡Hint: You can write about fruit, cup or clothes from this lesson</p>
+
+        <br>
+        <button type="button" class="btn-blue" onclick="submitWriting()">Submit Writing</button>
+        <p id="writingScoreText" class="result-text"></p>
+        <div id="writingAnswerFeedback" class="answer-feedback"></div>
+    </div>
+
+    <script>
+        // ✅ WORD TYPING PRACTICE (Lesson10 New Words from Book)
+        const vocabList = [
+            {char:"杯子", pinyin:"bēizi", meaning:"cup; glass"},
+            {char:"售货员", pinyin:"shòuhuòyuán", meaning:"shop assistant; salesperson"},
+            {char:"这边", pinyin:"zhèbiān", meaning:"here; this side"},
+            {char:"钱", pinyin:"qián", meaning:"money"},
+            {char:"这些", pinyin:"zhèxiē", meaning:"these"},
+            {char:"块", pinyin:"kuài", meaning:"measure word for money"},
+            {char:"那些", pinyin:"nàxiē", meaning:"those"},
+            {char:"这儿", pinyin:"zhèr", meaning:"here"},
+            {char:"水果", pinyin:"shuǐguǒ", meaning:"fruit"},
+            {char:"少", pinyin:"shǎo", meaning:"few; little"},
+            {char:"斤", pinyin:"jīn", meaning:"jin (measure word for weight)"},
+            {char:"苹果", pinyin:"píngguǒ", meaning:"apple"},
+            {char:"便宜", pinyin:"piányi", meaning:"cheap; affordable"},
+            {char:"商店", pinyin:"shāngdiàn", meaning:"shop; store"},
+            {char:"衣服", pinyin:"yīfu", meaning:"clothes"},
+            {char:"件", pinyin:"jiàn", meaning:"measure word for clothes"},
+            {char:"元", pinyin:"yuán", meaning:"yuan (money unit)"},
+            {char:"怎么样", pinyin:"zěnmeyàng", meaning:"how / what do you think?"},
+            {char:"贵", pinyin:"guì", meaning:"expensive"},
+            {char:"穿", pinyin:"chuān", meaning:"wear; put on"},
+            {char:"女", pinyin:"nǚ", meaning:"female; woman"},
+            {char:"男", pinyin:"nán", meaning:"male; man"},
+            {char:"那儿", pinyin:"nàr", meaning:"there; that place"}
+        ];
+        let currentWordIndex = 0;
+        let vocabScore = 0;
+        let answeredIndex = [];
+
+        function loadWord(){
+            const word = vocabList[currentWordIndex];
+            document.getElementById("wordPinyin").innerText = word.pinyin;
+            document.getElementById("wordMeaning").innerText = word.meaning;
+            document.getElementById("vocabInput").value = "";
+            document.getElementById("instantFeedback").innerText = "";
+        }
+        function submitWord(){
+            if(answeredIndex.includes(currentWordIndex)){
+                document.getElementById("instantFeedback").innerText = "✅ Tum is word ko already check kar chuke ho, Next par jao.";
+                return;
+            }
+            const userAns = document.getElementById("vocabInput").value.trim();
+            const correctAns = vocabList[currentWordIndex].char;
+            answeredIndex.push(currentWordIndex);
+
+            if(userAns === correctAns){
+                vocabScore++;
+                document.getElementById("instantFeedback").innerText = "✅ Sahi!";
+                document.getElementById("instantFeedback").style.color="#1a8c35";
+            }else{
+                document.getElementById("instantFeedback").innerText = `❌ Ghalat! Sahi jawab: ${correctAns}`;
+                document.getElementById("instantFeedback").style.color="#d62828";
+            }
+        }
+        function nextWord(){
+            if(currentWordIndex < vocabList.length - 1){
+                currentWordIndex++;
+                loadWord();
+            }
+        }
+        function showVocabScore(){
+            document.getElementById("vocabResultText").innerText = `📝 Vocabulary Score: ${vocabScore}/${vocabList.length}`;
+        }
+        loadWord();
+
+        // ✅ READING SUBMIT + FEEDBACK
+        function submitReading(){
+            let score = 0;
+            const ans = {
+                rq1:{val:"A", text:"A. 五块钱"},
+                rq2:{val:"A", text:"A. 真便宜"},
+                rq3:{val:"A", text:"A. 在那儿"},
+                gq1:{val:"A", text:"A. 怎么样 (ask for opinion)"},
+                gq2:{val:"A", text:"A. 不少 (adjective predicate)"},
+                gq3:{val:"A", text:"A. 块 (money measure word)"}
+            }
+            const total = Object.keys(ans).length;
+            let feedbackHtml = "<strong>✅ / ❌ Jawabat & Explanation:</strong><br>";
+            for(let key in ans){
+                let selected = document.querySelector(`input[name="${key}"]:checked`);
+                if(selected && selected.value === ans[key].val){
+                    score++;
+                    feedbackHtml += `${key}: ✅ ${ans[key].text}<br>`;
+                }else{
+                    feedbackHtml += `${key}: ❌ Sahi jawab → ${ans[key].text}<br>`;
+                }
+            }
+            document.getElementById("readingScoreText").innerText = `📖 Reading & Grammar Score: ${score}/${total}`;
+            document.getElementById("readingAnswerFeedback").innerHTML = feedbackHtml;
+        }
+
+        // ✅ WRITING SUBMIT + FEEDBACK (3 Tasks! Real HSK style)
+        function submitWriting(){
+            let score = 0;
+            const correctBlanks = {
+                w1Input:{ans:"便宜", q:"Task1 Q1: 这儿的苹果真____！"},
+                w2Input:{ans:"块", q:"Task1 Q2: 这个杯子五____钱一个。"},
+                w3Input:{ans:"这件衣服怎么样？", q:"Task2 Rearrange: 这件 / 怎么样 / 衣服 / ?"}
+            }
+            const totalBlanks = Object.keys(correctBlanks).length;
+            let feedbackHtml = "<strong>✅ / ❌ Feedback for Task1 & Task2:</strong><br>";
+            for(let key in correctBlanks){
+                let val = document.getElementById(key).value.trim();
+                if(val === correctBlanks[key].ans){
+                    score++;
+                    feedbackHtml += `${correctBlanks[key].q} ✅ ${correctBlanks[key].ans}<br>`;
+                }else{
+                    feedbackHtml += `${correctBlanks[key].q} ❌ Sahi jawab → ${correctBlanks[key].ans}<br>`;
+                }
+            }
+            feedbackHtml += `<br><strong>Task 3 Sentence Note (Self check):</strong> Check: 1) Did you use word 便宜? 2) Simple HSK1 structure. Example answer: 这个苹果很便宜。`;
+            document.getElementById("writingScoreText").innerText = `✍️ Writing Score (Task1+Task2): ${score}/${totalBlanks}`;
+            document.getElementById("writingAnswerFeedback").innerHTML = feedbackHtml;
+        }
+    </script>
+</body>
+</html>

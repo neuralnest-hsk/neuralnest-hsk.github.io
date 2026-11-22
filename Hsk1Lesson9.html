@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HSK1 Lesson 9 Practice</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            max-width: 720px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background-color: #f7f7f7;
+        }
+        .card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 6px #00000018;
+        }
+        h2 {
+            color: #b82626;
+        }
+        .mcq-option {
+            display: block;
+            margin: 0.8rem 0;
+            cursor: pointer;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 0.7rem;
+            margin: 0.5rem 0 1.2rem;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+        .btn-blue{
+            padding: 0.8rem 1.2rem;
+            border: none;
+            background-color: #2b78e4;
+            color: white;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin:0.4rem;
+        }
+        .btn-blue:hover {
+            background-color: #1d5fb8;
+        }
+        .result-text {
+            margin-top: 1rem;
+            font-weight: bold;
+            color: #1a8c35;
+        }
+        hr {
+            margin: 2rem 0;
+        }
+        .word-info{
+            font-size:1.1rem;
+            margin:0.6rem 0;
+        }
+        .answer-feedback{
+            margin-top:1rem;
+            border-top:1px solid #ddd;
+            padding-top:1rem;
+        }
+        /* New style for HSK style reading paragraph */
+        .hsk-paragraph{
+            background-color:#f0f6ff;
+            padding:1rem;
+            border-radius:8px;
+            margin:1rem 0;
+            line-height:1.7;
+        }
+        .q-heading{
+            font-weight:bold;
+            margin-top:1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align:center;">HSK1 Lesson 9 Practice 我明天上午在学校学习</h1>
+
+    <!-- 📝 WORD TYPING PRACTICE (Same old working system, NO CHANGE IN LOGIC) -->
+    <div class="card">
+        <h2>Word Typing Practice (Exact Answer Check)</h2>
+        <div class="word-info">Pinyin: <span id="wordPinyin"></span></div>
+        <div class="word-info">Meaning: <span id="wordMeaning"></span></div>
+        <input id="vocabInput" placeholder="Type exact Chinese character here">
+        <p id="instantFeedback"></p>
+        <br>
+        <button type="button" class="btn-blue" onclick="submitWord()">Submit Word</button>
+        <button type="button" class="btn-blue" onclick="nextWord()">Next</button>
+        <br>
+        <button type="button" class="btn-blue" onclick="showVocabScore()">Show Final Vocabulary Score</button>
+        <p id="vocabResultText" class="result-text"></p>
+    </div>
+
+    <!-- 📖 READING SECTION ✨ UPGRADED: REAL HSK1 EXAM STYLE PARAGRAPHS -->
+    <div class="card">
+        <h2>📖 HSK Style Reading & Grammar MCQs</h2>
+        <p class="q-heading">Read the paragraph and answer questions Q1-Q3</p>
+        <div class="hsk-paragraph">
+            学校前边有一家电影院。白家月和李文晚上七点在电影院外边见面，他们要一起看电影。椅子上有一本中文书，这是陈天中的第二本书。陈天中明天上午在学校学习。明天星期六，杨同乐白天在家里读书，晚上和朋友去外边唱歌。
+        </div>
+        <p><strong>Q1：他们几点在电影院外边见面？</strong></p>
+        <label class="mcq-option"><input type="radio" name="rq1" value="A"> A. 晚上七点</label>
+        <label class="mcq-option"><input type="radio" name="rq1" value="B"> B. 早上七点</label>
+        <label class="mcq-option"><input type="radio" name="rq1" value="C"> C. 下午两点</label>
+
+        <p><strong>Q2：椅子上的中文书是谁的？</strong></p>
+        <label class="mcq-option"><input type="radio" name="rq2" value="A"> A. 陈天中的</label>
+        <label class="mcq-option"><input type="radio" name="rq2" value="B"> B. 白家月的</label>
+        <label class="mcq-option"><input type="radio" name="rq2" value="C"> C. 李文的</label>
+
+        <p><strong>Q3：杨同乐星期六晚上做什么？</strong></p>
+        <label class="mcq-option"><input type="radio" name="rq3" value="A"> A. 和朋友去外边唱歌</label>
+        <label class="mcq-option"><input type="radio" name="rq3" value="B"> B. 在学校学习</label>
+        <label class="mcq-option"><input type="radio" name="rq3" value="C"> C. 看电影</label>
+
+        <hr>
+        <p class="q-heading">📚 Grammar Questions (Lesson 9 Grammar)</p>
+        <p><strong>Q4：学校前边____一家电影院。(Existential sentence 存现句)</strong></p>
+        <label class="mcq-option"><input type="radio" name="gq1" value="A"> A. 有</label>
+        <label class="mcq-option"><input type="radio" name="gq1" value="B"> B. 是</label>
+        <label class="mcq-option"><input type="radio" name="gq1" value="C"> C. 在</label>
+
+        <p><strong>Q5：这是我的____本中文书。(Ordinal number 第)</strong></p>
+        <label class="mcq-option"><input type="radio" name="gq2" value="A"> A. 第二</label>
+        <label class="mcq-option"><input type="radio" name="gq2" value="B"> B. 二</label>
+        <label class="mcq-option"><input type="radio" name="gq2" value="C"> C. 两</label>
+
+        <p><strong>Q6：我们七点____电影院外边见。(Time + location order)</strong></p>
+        <label class="mcq-option"><input type="radio" name="gq3" value="A"> A. 在</label>
+        <label class="mcq-option"><input type="radio" name="gq3" value="B"> B. 有</label>
+        <label class="mcq-option"><input type="radio" name="gq3" value="C"> C. 第</label>
+
+        <br>
+        <button type="button" class="btn-blue" onclick="submitReading()">Submit MCQs</button>
+        <p id="readingScoreText" class="result-text"></p>
+        <div id="readingAnswerFeedback" class="answer-feedback"></div>
+    </div>
+
+    <!-- ✍️ WRITING SECTION ✨ UPGRADED HSK STYLE -->
+    <div class="card">
+        <h2>✍️ HSK Style Writing Practice</h2>
+        <p>Instructions: Complete the tasks using words & grammar you learned in Lesson 9</p>
+        <p><strong>Task 1: Fill in the blanks</strong></p>
+        <p>1. 学校前边____一家电影院。</p>
+        <input id="w1Input" placeholder="Write Chinese character(s)">
+
+        <p>2. 这是我的____本中文书。</p>
+        <input id="w2Input" placeholder="Write Chinese character(s)">
+
+        <p><strong>Task 2: Make your own simple sentence (HSK1 level, use the word: 学习)</strong></p>
+        <textarea id="sentenceInput" rows="3" placeholder="Write your Chinese sentence here"></textarea>
+        <p style="font-size:0.9em;color:#444;">💡Hint: Try to use location word e.g. 在学校</p>
+
+        <br>
+        <button type="button" class="btn-blue" onclick="submitWriting()">Submit Writing</button>
+        <p id="writingScoreText" class="result-text"></p>
+        <div id="writingAnswerFeedback" class="answer-feedback"></div>
+    </div>
+
+    <script>
+        // ✅ WORD TYPING PRACTICE (Lesson 9 New Words from Book, logic same as before)
+        const vocabList = [
+            {char:"前边", pinyin:"qiánbian", meaning:"front"},
+            {char:"边", pinyin:"biān/bian", meaning:"side / suffix"},
+            {char:"家", pinyin:"jiā", meaning:"measure word for enterprises/families"},
+            {char:"那个", pinyin:"nàge", meaning:"that"},
+            {char:"外边", pinyin:"wàibian", meaning:"outside"},
+            {char:"椅子", pinyin:"yǐzi", meaning:"chair"},
+            {char:"上", pinyin:"shàng/shang", meaning:"on / up"},
+            {char:"本", pinyin:"běn", meaning:"measure word for books"},
+            {char:"书", pinyin:"shū", meaning:"book"},
+            {char:"那", pinyin:"nà", meaning:"that"},
+            {char:"第", pinyin:"dì", meaning:"prefix for ordinal number"},
+            {char:"学习", pinyin:"xuéxí", meaning:"study; learn"},
+            {char:"做", pinyin:"zuò", meaning:"do"},
+            {char:"白天", pinyin:"báitiān", meaning:"daytime"},
+            {char:"读书", pinyin:"dúshū", meaning:"read a book"},
+            {char:"和", pinyin:"hé", meaning:"with"},
+            {char:"朋友", pinyin:"péngyou", meaning:"friend"},
+            {char:"唱", pinyin:"chàng", meaning:"sing"},
+            {char:"歌", pinyin:"gē", meaning:"song"},
+            {char:"好听", pinyin:"hǎotīng", meaning:"pleasant to hear"},
+            {char:"电视", pinyin:"diànshì", meaning:"television"},
+            {char:"狗", pinyin:"gǒu", meaning:"dog"},
+            {char:"玩", pinyin:"wán", meaning:"play"}
+        ];
+        let currentWordIndex = 0;
+        let vocabScore = 0;
+        let answeredIndex = [];
+
+        function loadWord(){
+            const word = vocabList[currentWordIndex];
+            document.getElementById("wordPinyin").innerText = word.pinyin;
+            document.getElementById("wordMeaning").innerText = word.meaning;
+            document.getElementById("vocabInput").value = "";
+            document.getElementById("instantFeedback").innerText = "";
+        }
+        function submitWord(){
+            if(answeredIndex.includes(currentWordIndex)){
+                document.getElementById("instantFeedback").innerText = "✅ Tum is word ko already check kar chuke ho, Next par jao.";
+                return;
+            }
+            const userAns = document.getElementById("vocabInput").value.trim();
+            const correctAns = vocabList[currentWordIndex].char;
+            answeredIndex.push(currentWordIndex);
+
+            if(userAns === correctAns){
+                vocabScore++;
+                document.getElementById("instantFeedback").innerText = "✅ Sahi!";
+                document.getElementById("instantFeedback").style.color="#1a8c35";
+            }else{
+                document.getElementById("instantFeedback").innerText = `❌ Ghalat! Sahi jawab: ${correctAns}`;
+                document.getElementById("instantFeedback").style.color="#d62828";
+            }
+        }
+        function nextWord(){
+            if(currentWordIndex < vocabList.length - 1){
+                currentWordIndex++;
+                loadWord();
+            }
+        }
+        function showVocabScore(){
+            document.getElementById("vocabResultText").innerText = `📝 Vocabulary Score: ${vocabScore}/${vocabList.length}`;
+        }
+        loadWord();
+
+        // ✅ READING SUBMIT + FEEDBACK
+        function submitReading(){
+            let score = 0;
+            const ans = {
+                rq1:{val:"A", text:"A. 晚上七点"},
+                rq2:{val:"A", text:"A. 陈天中的"},
+                rq3:{val:"A", text:"A. 和朋友去外边唱歌"},
+                gq1:{val:"A", text:"A. 有 (存现 sentence for existence)"},
+                gq2:{val:"A", text:"A. 第二 (ordinal number with 第)"},
+                gq3:{val:"A", text:"A. 在 (mark location)"}
+            }
+            const total = Object.keys(ans).length;
+            let feedbackHtml = "<strong>✅ / ❌ Jawabat & Explanation:</strong><br>";
+            for(let key in ans){
+                let selected = document.querySelector(`input[name="${key}"]:checked`);
+                if(selected && selected.value === ans[key].val){
+                    score++;
+                    feedbackHtml += `${key}: ✅ ${ans[key].text}<br>`;
+                }else{
+                    feedbackHtml += `${key}: ❌ Sahi jawab → ${ans[key].text}<br>`;
+                }
+            }
+            document.getElementById("readingScoreText").innerText = `📖 Reading & Grammar Score: ${score}/${total}`;
+            document.getElementById("readingAnswerFeedback").innerHTML = feedbackHtml;
+        }
+
+        // ✅ WRITING SUBMIT + FEEDBACK (Sentence task ke liye basic guidance dega, full auto check nahi kyunki sentences alag alag ho sakte hain HSK mein)
+        function submitWriting(){
+            let score = 0;
+            const correctBlanks = {
+                w1Input:{ans:"有", q:"1. 学校前边____一家电影院。"},
+                w2Input:{ans:"第二", q:"2. 这是我的____本中文书。"}
+            }
+            const totalBlanks = Object.keys(correctBlanks).length;
+            let feedbackHtml = "<strong>✅ / ❌ Fill blanks feedback:</strong><br>";
+            for(let key in correctBlanks){
+                let val = document.getElementById(key).value.trim();
+                if(val === correctBlanks[key].ans){
+                    score++;
+                    feedbackHtml += `${correctBlanks[key].q} ✅ ${correctBlanks[key].ans}<br>`;
+                }else{
+                    feedbackHtml += `${correctBlanks[key].q} ❌ Sahi jawab → ${correctBlanks[key].ans}<br>`;
+                }
+            }
+            feedbackHtml += `<br><strong>Sentence Task Note:</strong> Check your sentence manually: Did you use 学习? Is it simple HSK1 level? Example answer: 我在学校学习。`;
+            document.getElementById("writingScoreText").innerText = `✍️ Writing Score (Only blanks): ${score}/${totalBlanks}`;
+            document.getElementById("writingAnswerFeedback").innerHTML = feedbackHtml;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HSK1 第十三课练习</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            max-width: 720px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background-color: #f7f7f7;
+        }
+        .card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 6px #00000018;
+        }
+        h2 {
+            color: #b82626;
+        }
+        .mcq-option {
+            display: block;
+            margin: 0.8rem 0;
+            cursor: pointer;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 0.7rem;
+            margin: 0.5rem 0 1.2rem;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+        .btn-blue{
+            padding: 0.8rem 1.2rem;
+            border: none;
+            background-color: #2b78e4;
+            color: white;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin:0.4rem;
+        }
+        .btn-blue:hover {
+            background-color: #1d5fb8;
+        }
+        .result-text {
+            margin-top: 1rem;
+            font-weight: bold;
+            color: #1a8c35;
+        }
+        hr {
+            margin: 2rem 0;
+        }
+        .word-info{
+            font-size:1.1rem;
+            margin:0.6rem 0;
+        }
+        .answer-feedback{
+            margin-top:1rem;
+            border-top:1px solid #ddd;
+            padding-top:1rem;
+        }
+        .hsk-paragraph{
+            background-color:#f0f6ff;
+            padding:1rem;
+            border-radius:8px;
+            margin:1rem 0;
+            line-height:1.7;
+        }
+        .q-heading{
+            font-weight:bold;
+            margin-top:1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align:center;">HSK1 第十三课练习 请给我一杯茶</h1>
+
+    <!-- 📝 单词练习 -->
+    <div class="card">
+        <h2>单词练习</h2>
+        <div class="word-info">Pinyin: <span id="wordPinyin"></span></div>
+        <div class="word-info">Meaning: <span id="wordMeaning"></span></div>
+        <input id="vocabInput" placeholder="写出正确的汉字">
+        <p id="instantFeedback"></p>
+        <br>
+        <button type="button" class="btn-blue" onclick="submitWord()">提交</button>
+        <button type="button" class="btn-blue" onclick="nextWord()">下一个</button>
+        <br>
+        <button type="button" class="btn-blue" onclick="showVocabScore()">查看单词总分</button>
+        <p id="vocabResultText" class="result-text"></p>
+    </div>
+
+    <!-- 📖 阅读（两篇短文，每篇3道选择题，全部中文） -->
+    <div class="card">
+        <h2>阅读</h2>
+        <p class="q-heading">短文一</p>
+        <div class="hsk-paragraph">
+            下课以后，白家月想再问王老师一个问题：小店卖不卖手机。王老师不知道，让白家月打电话问一下。另一边，王一雪到店里，先要一杯牛奶，因为还没有吃早饭，她还要这个面包和鸡蛋当早饭。
+        </div>
+        <p><strong>第1题：白家月想再问王老师几个问题？</strong></p>
+        <label class="mcq-option"><input type="radio" name="p1q1" value="A"> A. 一个问题</label>
+        <label class="mcq-option"><input type="radio" name="p1q1" value="B"> B. 两个问题</label>
+        <label class="mcq-option"><input type="radio" name="p1q1" value="C"> C. 三个问题</label>
+
+        <p><strong>第2题：王一雪先要什么喝的？</strong></p>
+        <label class="mcq-option"><input type="radio" name="p1q2" value="A"> A. 茶</label>
+        <label class="mcq-option"><input type="radio" name="p1q2" value="B"> B. 牛奶</label>
+        <label class="mcq-option"><input type="radio" name="p1q2" value="C"> C. 水</label>
+
+        <p><strong>第3题：王一雪还要面包和鸡蛋做什么？</strong></p>
+        <label class="mcq-option"><input type="radio" name="p1q3" value="A"> A. 早饭</label>
+        <label class="mcq-option"><input type="radio" name="p1q3" value="B"> B. 午饭</label>
+        <label class="mcq-option"><input type="radio" name="p1q3" value="C"> C. 晚饭</label>
+
+        <hr>
+        <p class="q-heading">短文二</p>
+        <div class="hsk-paragraph">
+            刘明来到店里，一开始想要一斤饺子，一斤饺子有四十个。他觉得四十个太多，只要一半，也就是二十个饺子。之后服务员问他喝什么，刘明说：“请给我一杯茶吧。”
+        </div>
+        <p><strong>第4题：一斤饺子一共多少个？</strong></p>
+        <label class="mcq-option"><input type="radio" name="p2q1" value="A"> A. 二十个</label>
+        <label class="mcq-option"><input type="radio" name="p2q1" value="B"> B. 三十个</label>
+        <label class="mcq-option"><input type="radio" name="p2q1" value="C"> C. 四十个</label>
+
+        <p><strong>第5题：刘明最后要多少饺子？</strong></p>
+        <label class="mcq-option"><input type="radio" name="p2q2" value="A"> A. 二十个</label>
+        <label class="mcq-option"><input type="radio" name="p2q2" value="B"> B. 四十个</label>
+        <label class="mcq-option"><input type="radio" name="p2q2" value="C"> C. 一斤</label>
+
+        <p><strong>第6题：刘明想喝什么？</strong></p>
+        <label class="mcq-option"><input type="radio" name="p2q3" value="A"> A. 茶</label>
+        <label class="mcq-option"><input type="radio" name="p2q3" value="B"> B. 牛奶</label>
+        <label class="mcq-option"><input type="radio" name="p2q3" value="C"> C. 水</label>
+
+        <br>
+        <button type="button" class="btn-blue" onclick="submitReading()">提交</button>
+        <p id="readingScoreText" class="result-text"></p>
+        <div id="readingAnswerFeedback" class="answer-feedback"></div>
+    </div>
+
+    <!-- ✍️ 写作 -->
+    <div class="card">
+        <h2>写作</h2>
+        <p>答题要求：完成任务一和任务二</p>
+
+        <p><strong>任务一：填空（5道题）</strong></p>
+        <p>1. 请____我一杯茶。</p>
+        <input id="w1Input" placeholder="写出汉字">
+        <p>2. 我____问老师一个问题，可以吗？</p>
+        <input id="w2Input" placeholder="写出汉字">
+        <p>3. 这____面包很好吃。</p>
+        <input id="w3Input" placeholder="写出汉字">
+        <p>4. 我还没吃早____。</p>
+        <input id="w4Input" placeholder="写出汉字">
+        <p>5. 我想____一杯牛奶。</p>
+        <input id="w5Input" placeholder="写出汉字">
+
+        <p><strong>任务二：连词成句（5道题）</strong></p>
+        <p>1. 词语：给 / 一杯 / 请 / 我 / 茶 / 。</p>
+        <input id="w6Input" placeholder="写出完整正确的句子">
+        <p>2. 词语：一个 / 我 / 问 / 问题 / 老师 / 。</p>
+        <input id="w7Input" placeholder="写出完整正确的句子">
+        <p>3. 词语：早饭 / 还 / 我 / 吃 / 没 / 。</p>
+        <input id="w8Input" placeholder="写出完整正确的句子">
+        <p>4. 词语：饺子 / 要 / 二十个 / 我 / 。</p>
+        <input id="w9Input" placeholder="写出完整正确的句子">
+        <p>5. 词语：打电话 / 你 / 一下 / 可以 / 。</p>
+        <input id="w10Input" placeholder="写出完整正确的句子">
+
+        <br>
+        <button type="button" class="btn-blue" onclick="submitWriting()">提交</button>
+        <p id="writingScoreText" class="result-text"></p>
+        <div id="writingAnswerFeedback" class="answer-feedback"></div>
+    </div>
+
+    <script>
+        // 单词表
+        const vocabList = [
+            {char:"可以", pinyin:"kěyǐ", meaning:"can; may"},
+            {char:"再", pinyin:"zài", meaning:"once more; again"},
+            {char:"问题", pinyin:"wèntí", meaning:"question; problem"},
+            {char:"卖", pinyin:"mài", meaning:"sell"},
+            {char:"打电话", pinyin:"dǎ diànhuà", meaning:"make a phone call"},
+            {char:"一下", pinyin:"yíxià", meaning:"one time; once"},
+            {char:"服务员", pinyin:"fúwùyuán", meaning:"waiter; waitress"},
+            {char:"女士", pinyin:"nǚshì", meaning:"lady; madam"},
+            {char:"请", pinyin:"qǐng", meaning:"please"},
+            {char:"坐", pinyin:"zuò", meaning:"sit"},
+            {char:"给", pinyin:"gěi", meaning:"give"},
+            {char:"杯", pinyin:"bēi", meaning:"cup; glass"},
+            {char:"要", pinyin:"yào", meaning:"ask for; want"},
+            {char:"早饭", pinyin:"zǎofàn", meaning:"breakfast"},
+            {char:"这个", pinyin:"zhège", meaning:"this"},
+            {char:"面包", pinyin:"miànbāo", meaning:"bread"},
+            {char:"鸡蛋", pinyin:"jīdàn", meaning:"egg"},
+            {char:"先生", pinyin:"xiānsheng", meaning:"gentleman; sir"},
+            {char:"一半", pinyin:"yíbàn", meaning:"half"},
+            {char:"茶", pinyin:"chá", meaning:"tea"}
+        ];
+        let currentWordIndex = 0;
+        let vocabScore = 0;
+        let answeredIndex = [];
+
+        function loadWord(){
+            const word = vocabList[currentWordIndex];
+            document.getElementById("wordPinyin").innerText = word.pinyin;
+            document.getElementById("wordMeaning").innerText = word.meaning;
+            document.getElementById("vocabInput").value = "";
+            document.getElementById("instantFeedback").innerText = "";
+        }
+        function submitWord(){
+            if(answeredIndex.includes(currentWordIndex)){
+                document.getElementById("instantFeedback").innerText = "✅ 这道单词你已经提交过了，请点下一个。";
+                return;
+            }
+            const userAns = document.getElementById("vocabInput").value.trim();
+            const correctAns = vocabList[currentWordIndex].char;
+            answeredIndex.push(currentWordIndex);
+
+            if(userAns === correctAns){
+                vocabScore++;
+                document.getElementById("instantFeedback").innerText = "✅ 正确！";
+                document.getElementById("instantFeedback").style.color="#1a8c35";
+            }else{
+                document.getElementById("instantFeedback").innerText = `❌ 错误！正确答案：${correctAns}`;
+                document.getElementById("instantFeedback").style.color="#d62828";
+            }
+        }
+        function nextWord(){
+            if(currentWordIndex < vocabList.length - 1){
+                currentWordIndex++;
+                loadWord();
+            }
+        }
+        function showVocabScore(){
+            document.getElementById("vocabResultText").innerText = `📝 单词得分：${vocabScore}/${vocabList.length}`;
+        }
+        loadWord();
+
+        // 阅读提交
+        function submitReading(){
+            let score = 0;
+            const ans = {
+                p1q1:{val:"A", text:"A. 一个问题"},
+                p1q2:{val:"B", text:"B. 牛奶"},
+                p1q3:{val:"A", text:"A. 早饭"},
+                p2q1:{val:"C", text:"C. 四十个"},
+                p2q2:{val:"A", text:"A. 二十个"},
+                p2q3:{val:"A", text:"A. 茶"}
+            }
+            const total = Object.keys(ans).length;
+            let feedbackHtml = "<strong>参考答案：</strong><br>";
+            for(let key in ans){
+                let selected = document.querySelector(`input[name="${key}"]:checked`);
+                const userAnswer = selected ? selected.value : "未作答";
+                if(userAnswer === ans[key].val){
+                    score++;
+                    feedbackHtml += `${key}: ✅ ${ans[key].text}<br>`;
+                }else{
+                    feedbackHtml += `${key}: ❌ 正确答案 → ${ans[key].text}<br>`;
+                }
+            }
+            document.getElementById("readingScoreText").innerText = `📖 阅读得分: ${score}/${total}`;
+            document.getElementById("readingAnswerFeedback").innerHTML = feedbackHtml;
+        }
+
+        // 写作提交
+        function submitWriting(){
+            let score = 0;
+            const correctWriting = {
+                w1Input:{ans:"给", q:"任务一 第1题：请____我一杯茶。"},
+                w2Input:{ans:"可以", q:"任务一 第2题：我____问老师一个问题，可以吗？"},
+                w3Input:{ans:"个", q:"任务一 第3题：这____面包很好吃。"},
+                w4Input:{ans:"饭", q:"任务一 第4题：我还没吃早____。"},
+                w5Input:{ans:"要", q:"任务一 第5题：我想____一杯牛奶。"},
+                w6Input:{ans:"请给我一杯茶。", q:"任务二 第1题连词成句：给 / 一杯 / 请 / 我 / 茶 / 。"},
+                w7Input:{ans:"我问老师一个问题。", q:"任务二 第2题连词成句：一个 / 我 / 问 / 问题 / 老师 / 。"},
+                w8Input:{ans:"我还没吃早饭。", q:"任务二 第3题连词成句：早饭 / 还 / 我 / 吃 / 没 / 。"},
+                w9Input:{ans:"我要二十个饺子。", q:"任务二 第4题连词成句：饺子 / 要 / 二十个 / 我 / 。"},
+                w10Input:{ans:"你可以打电话一下。", q:"任务二 第5题连词成句：打电话 / 你 / 一下 / 可以 / 。"}
+            }
+            const totalWriting = Object.keys(correctWriting).length;
+            let feedbackHtml = "<strong>写作参考答案：</strong><br>";
+            for(let key in correctWriting){
+                let val = document.getElementById(key).value.trim();
+                if(val === correctWriting[key].ans){
+                    score++;
+                    feedbackHtml += `${correctWriting[key].q} ✅ ${correctWriting[key].ans}<br>`;
+                }else{
+                    feedbackHtml += `${correctWriting[key].q} ❌ 正确答案 → ${correctWriting[key].ans}<br>`;
+                }
+            }
+            document.getElementById("writingScoreText").innerText = `✍️ 写作得分: ${score}/${totalWriting}`;
+            document.getElementById("writingAnswerFeedback").innerHTML = feedbackHtml;
+        }
+    </script>
+</body>
+</html>

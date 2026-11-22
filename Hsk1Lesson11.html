@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HSK1 Lesson 11 Practice</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            max-width: 720px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background-color: #f7f7f7;
+        }
+        .card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 6px #00000018;
+        }
+        h2 {
+            color: #b82626;
+        }
+        .mcq-option {
+            display: block;
+            margin: 0.8rem 0;
+            cursor: pointer;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 0.7rem;
+            margin: 0.5rem 0 1.2rem;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+        .btn-blue{
+            padding: 0.8rem 1.2rem;
+            border: none;
+            background-color: #2b78e4;
+            color: white;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin:0.4rem;
+        }
+        .btn-blue:hover {
+            background-color: #1d5fb8;
+        }
+        .result-text {
+            margin-top: 1rem;
+            font-weight: bold;
+            color: #1a8c35;
+        }
+        hr {
+            margin: 2rem 0;
+        }
+        .word-info{
+            font-size:1.1rem;
+            margin:0.6rem 0;
+        }
+        .answer-feedback{
+            margin-top:1rem;
+            border-top:1px solid #ddd;
+            padding-top:1rem;
+        }
+        .hsk-paragraph{
+            background-color:#f0f6ff;
+            padding:1rem;
+            border-radius:8px;
+            margin:1rem 0;
+            line-height:1.7;
+        }
+        .q-heading{
+            font-weight:bold;
+            margin-top:1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align:center;">HSK1 Lesson 11 Practice 我读大学呢</h1>
+
+    <!-- 📝 WORD TYPING PRACTICE (Feedback in ENGLISH for international learners) -->
+    <div class="card">
+        <h2>Word Typing Practice (Exact Answer Check)</h2>
+        <div class="word-info">Pinyin: <span id="wordPinyin"></span></div>
+        <div class="word-info">Meaning: <span id="wordMeaning"></span></div>
+        <input id="vocabInput" placeholder="Type exact Chinese character here">
+        <p id="instantFeedback"></p>
+        <br>
+        <button type="button" class="btn-blue" onclick="submitWord()">Submit Word</button>
+        <button type="button" class="btn-blue" onclick="nextWord()">Next</button>
+        <br>
+        <button type="button" class="btn-blue" onclick="showVocabScore()">Show Final Vocabulary Score</button>
+        <p id="vocabResultText" class="result-text"></p>
+    </div>
+
+    <!-- 📖 READING ✨ HSK Exam Style Paragraph + Grammar MCQs -->
+    <div class="card">
+        <h2>📖 HSK Style Reading & Grammar MCQs</h2>
+        <p class="q-heading">Read the paragraph and answer Q1‑Q3</p>
+        <div class="hsk-paragraph">
+            王一飞问李文什么时候能到饭店。李文还在找饭店，他没有开车，正在坐车。李文在读大学，是医学生，学习非常忙。弟弟还在睡觉，今天他要和小朋友玩，不去超市。
+        </div>
+        <p><strong>Q1：李文现在在做什么？</strong></p>
+        <label class="mcq-option"><input type="radio" name="rq1" value="A"> A. 正在坐车找饭店</label>
+        <label class="mcq-option"><input type="radio" name="rq1" value="B"> B. 开车去饭店</label>
+        <label class="mcq-option"><input type="radio" name="rq1" value="C"> C. 和小朋友玩</label>
+
+        <p><strong>Q2：李文在大学学什么？</strong></p>
+        <label class="mcq-option"><input type="radio" name="rq2" value="A"> A. 医</label>
+        <label class="mcq-option"><input type="radio" name="rq2" value="B"> B. 开车</label>
+        <label class="mcq-option"><input type="radio" name="rq2" value="C"> C. 睡觉</label>
+
+        <p><strong>Q3：弟弟今天要做什么？</strong></p>
+        <label class="mcq-option"><input type="radio" name="rq3" value="A"> A. 和小朋友玩</label>
+        <label class="mcq-option"><input type="radio" name="rq3" value="B"> B. 去超市</label>
+        <label class="mcq-option"><input type="radio" name="rq3" value="C"> C. 读大学</label>
+
+        <hr>
+        <p class="q-heading">📚 Grammar MCQs (Lesson11 Grammar)</p>
+        <p><strong>Q4：它____不是在超市后边？ (Affirmative‑negative question)</strong></p>
+        <label class="mcq-option"><input type="radio" name="gq1" value="A"> A. 是不</label>
+        <label class="mcq-option"><input type="radio" name="gq1" value="B"> B. 要</label>
+        <label class="mcq-option"><input type="radio" name="gq1" value="C"> C. 正在</label>
+
+        <p><strong>Q5：弟弟____睡觉呢。(action in progress)</strong></p>
+        <label class="mcq-option"><input type="radio" name="gq2" value="A"> A. 还在</label>
+        <label class="mcq-option"><input type="radio" name="gq2" value="B"> B. 要</label>
+        <label class="mcq-option"><input type="radio" name="gq2" value="C"> C. 去</label>
+
+        <p><strong>Q6：他今天____和小朋友玩。(modal verb for plan/want)</strong></p>
+        <label class="mcq-option"><input type="radio" name="gq3" value="A"> A. 要</label>
+        <label class="mcq-option"><input type="radio" name="gq3" value="B"> B. 正在</label>
+        <label class="mcq-option"><input type="radio" name="gq3" value="C"> C. 读</label>
+
+        <br>
+        <button type="button" class="btn-blue" onclick="submitReading()">Submit MCQs</button>
+        <p id="readingScoreText" class="result-text"></p>
+        <div id="readingAnswerFeedback" class="answer-feedback"></div>
+    </div>
+
+    <!-- ✍️ ✨ WRITING PART (Task1: 5 Fill blanks | Task2:5 Word rearrangement HSK exam pattern) -->
+    <div class="card">
+        <h2>✍️ HSK Style Writing Practice</h2>
+        <p>Instructions: Complete Task 1 and Task 2 (New HSK1 exam pattern)</p>
+
+        <p><strong>Task 1: Fill in the blanks (5 Questions)</strong></p>
+        <p>1. 我____大学呢。</p>
+        <input id="w1Input" placeholder="Write Chinese character(s)">
+        <p>2. 弟弟还在____呢。</p>
+        <input id="w2Input" placeholder="Write Chinese character(s)">
+        <p>3. 他今天____和小朋友玩。</p>
+        <input id="w3Input" placeholder="Write Chinese character(s)">
+        <p>4. 她没在看电视，____学习呢。</p>
+        <input id="w4Input" placeholder="Write Chinese character(s)">
+        <p>5. 你____开车？(Affirmative‑negative question)</p>
+        <input id="w5Input" placeholder="Write Chinese character(s)">
+
+        <p><strong>Task 2: Word rearrangement (5 Questions, HSK exam type, make correct sentence)</strong></p>
+        <p>1. Words: 还在 / 弟弟 / 睡觉 / 呢 / 。</p>
+        <input id="w6Input" placeholder="Write full correct Chinese sentence">
+        <p>2. Words: 今天 / 他 / 玩 / 要 / 和小朋友 / 。</p>
+        <input id="w7Input" placeholder="Write full correct Chinese sentence">
+        <p>3. Words: 大学 / 我 / 读 / 呢 / 。</p>
+        <input id="w8Input" placeholder="Write full correct Chinese sentence">
+        <p>4. Words: 饭店 / 什么时候 / 到 / 能 / 你 / ?</p>
+        <input id="w9Input" placeholder="Write full correct Chinese sentence">
+        <p>5. Words: 正在 / 找 / 李文 / 饭店 / 。</p>
+        <input id="w10Input" placeholder="Write full correct Chinese sentence">
+
+        <br>
+        <button type="button" class="btn-blue" onclick="submitWriting()">Submit Writing</button>
+        <p id="writingScoreText" class="result-text"></p>
+        <div id="writingAnswerFeedback" class="answer-feedback"></div>
+    </div>
+
+    <script>
+        // ✅ WORD TYPING PRACTICE (Lesson 11 New Words, feedback ENGLISH for international learners)
+        const vocabList = [
+            {char:"时候", pinyin:"shíhou", meaning:"time (a point in time)"},
+            {char:"饭店", pinyin:"fàndiàn", meaning:"restaurant"},
+            {char:"知道", pinyin:"zhīdào", meaning:"know; realize"},
+            {char:"正在", pinyin:"zhèngzài", meaning:"in the process of; doing now"},
+            {char:"找", pinyin:"zhǎo", meaning:"look for; search"},
+            {char:"开车", pinyin:"kāichē", meaning:"drive (a vehicle)"},
+            {char:"车", pinyin:"chē", meaning:"vehicle; car"},
+            {char:"在", pinyin:"zài", meaning:"adverb: action in progress"},
+            {char:"读", pinyin:"dú", meaning:"attend school; study; read"},
+            {char:"大学", pinyin:"dàxué", meaning:"university; college"},
+            {char:"大学生", pinyin:"dàxuéshēng", meaning:"university student"},
+            {char:"学", pinyin:"xué", meaning:"study; learn"},
+            {char:"医", pinyin:"yī", meaning:"medicine"},
+            {char:"弟弟", pinyin:"dìdi", meaning:"younger brother"},
+            {char:"起床", pinyin:"qǐchuáng", meaning:"get up; get out of bed"},
+            {char:"睡觉", pinyin:"shuìjiào", meaning:"sleep; go to bed"},
+            {char:"睡", pinyin:"shuì", meaning:"sleep"},
+            {char:"那里", pinyin:"nàlǐ", meaning:"there; that place"},
+            {char:"哪里", pinyin:"nǎlǐ", meaning:"where"},
+            {char:"昨天", pinyin:"zuótiān", meaning:"yesterday"},
+            {char:"问", pinyin:"wèn", meaning:"ask"},
+            {char:"对", pinyin:"duì", meaning:"to; towards; prep."},
+            {char:"说", pinyin:"shuō", meaning:"say; speak; talk"},
+            {char:"要", pinyin:"yào", meaning:"want; will; intend to do"},
+            {char:"小朋友", pinyin:"xiǎopéngyou", meaning:"child; kid"}
+        ];
+        let currentWordIndex = 0;
+        let vocabScore = 0;
+        let answeredIndex = [];
+
+        function loadWord(){
+            const word = vocabList[currentWordIndex];
+            document.getElementById("wordPinyin").innerText = word.pinyin;
+            document.getElementById("wordMeaning").innerText = word.meaning;
+            document.getElementById("vocabInput").value = "";
+            document.getElementById("instantFeedback").innerText = "";
+        }
+        function submitWord(){
+            if(answeredIndex.includes(currentWordIndex)){
+                document.getElementById("instantFeedback").innerText = "✅ You have already checked this word, go to Next.";
+                return;
+            }
+            const userAns = document.getElementById("vocabInput").value.trim();
+            const correctAns = vocabList[currentWordIndex].char;
+            answeredIndex.push(currentWordIndex);
+
+            if(userAns === correctAns){
+                vocabScore++;
+                document.getElementById("instantFeedback").innerText = "✅ Correct!";
+                document.getElementById("instantFeedback").style.color="#1a8c35";
+            }else{
+                document.getElementById("instantFeedback").innerText = `❌ Wrong! Correct answer: ${correctAns}`;
+                document.getElementById("instantFeedback").style.color="#d62828";
+            }
+        }
+        function nextWord(){
+            if(currentWordIndex < vocabList.length - 1){
+                currentWordIndex++;
+                loadWord();
+            }
+        }
+        function showVocabScore(){
+            document.getElementById("vocabResultText").innerText = `📝 Vocabulary Score: ${vocabScore}/${vocabList.length}`;
+        }
+        loadWord();
+
+        // ✅ READING SUBMIT + FEEDBACK
+        function submitReading(){
+            let score = 0;
+            const ans = {
+                rq1:{val:"A", text:"A. 正在坐车找饭店"},
+                rq2:{val:"A", text:"A. 医"},
+                rq3:{val:"A", text:"A. 和小朋友玩"},
+                gq1:{val:"A", text:"A. 是不 (Affirmative‑negative question)"},
+                gq2:{val:"A", text:"A. 还在 (action still in progress)"},
+                gq3:{val:"A", text:"A. 要 (plan / intention modal verb)"}
+            }
+            const total = Object.keys(ans).length;
+            let feedbackHtml = "<strong>✅ / ❌ Answers & Explanation:</strong><br>";
+            for(let key in ans){
+                let selected = document.querySelector(`input[name="${key}"]:checked`);
+                if(selected && selected.value === ans[key].val){
+                    score++;
+                    feedbackHtml += `${key}: ✅ ${ans[key].text}<br>`;
+                }else{
+                    feedbackHtml += `${key}: ❌ Correct answer → ${ans[key].text}<br>`;
+                }
+            }
+            document.getElementById("readingScoreText").innerText = `📖 Reading & Grammar Score: ${score}/${total}`;
+            document.getElementById("readingAnswerFeedback").innerHTML = feedbackHtml;
+        }
+
+        // ✅ WRITING SUBMIT + FEEDBACK (Task 1: 5 blanks, Task2:5 sentence rearrangement, total 10 writing questions HSK pattern)
+        function submitWriting(){
+            let score = 0;
+            const correctWriting = {
+                w1Input:{ans:"读", q:"Task1 Q1: 我____大学呢。"},
+                w2Input:{ans:"睡觉", q:"Task1 Q2: 弟弟还在____呢。"},
+                w3Input:{ans:"要", q:"Task1 Q3: 他今天____和小朋友玩。"},
+                w4Input:{ans:"正在", q:"Task1 Q4: 她没在看电视，____学习呢。"},
+                w5Input:{ans:"开没", q:"Task1 Q5: 你____开车？"},
+                w6Input:{ans:"弟弟还在睡觉呢。", q:"Task2 Q1 Rearrange: 还在 / 弟弟 / 睡觉 / 呢 / 。"},
+                w7Input:{ans:"他今天要和小朋友玩。", q:"Task2 Q2 Rearrange: 今天 / 他 / 玩 / 要 / 和小朋友 / 。"},
+                w8Input:{ans:"我读大学呢。", q:"Task2 Q3 Rearrange: 大学 / 我 / 读 / 呢 / 。"},
+                w9Input:{ans:"你什么时候能到饭店？", q:"Task2 Q4 Rearrange: 饭店 / 什么时候 / 到 / 能 / 你 / ?"},
+                w10Input:{ans:"李文正在找饭店。", q:"Task2 Q5 Rearrange: 正在 / 找 / 李文 / 饭店 / 。"}
+            }
+            const totalWriting = Object.keys(correctWriting).length;
+            let feedbackHtml = "<strong>✅ / ❌ Feedback for Task1 & Task2:</strong><br>";
+            for(let key in correctWriting){
+                let val = document.getElementById(key).value.trim();
+                if(val === correctWriting[key].ans){
+                    score++;
+                    feedbackHtml += `${correctWriting[key].q} ✅ ${correctWriting[key].ans}<br>`;
+                }else{
+                    feedbackHtml += `${correctWriting[key].q} ❌ Correct answer → ${correctWriting[key].ans}<br>`;
+                }
+            }
+            document.getElementById("writingScoreText").innerText = `✍️ Writing Score (Task1+Task2): ${score}/${totalWriting}`;
+            document.getElementById("writingAnswerFeedback").innerHTML = feedbackHtml;
+        }
+    </script>
+</body>
+</html>

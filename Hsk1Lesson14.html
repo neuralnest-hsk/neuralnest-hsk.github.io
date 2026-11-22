@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HSK1 第十四课练习</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            max-width: 720px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background-color: #f7f7f7;
+        }
+        .card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 6px #00000018;
+        }
+        h2 {
+            color: #b82626;
+        }
+        .mcq-option {
+            display: block;
+            margin: 0.8rem 0;
+            cursor: pointer;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 0.7rem;
+            margin: 0.5rem 0 1.2rem;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+        .btn-blue{
+            padding: 0.8rem 1.2rem;
+            border: none;
+            background-color: #2b78e4;
+            color: white;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin:0.4rem;
+        }
+        .btn-blue:hover {
+            background-color: #1d5fb8;
+        }
+        .result-text {
+            margin-top: 1rem;
+            font-weight: bold;
+            color: #1a8c35;
+        }
+        hr {
+            margin: 2rem 0;
+        }
+        .word-info{
+            font-size:1.1rem;
+            margin:0.6rem 0;
+        }
+        .answer-feedback{
+            margin-top:1rem;
+            border-top:1px solid #ddd;
+            padding-top:1rem;
+        }
+        .hsk-paragraph{
+            background-color:#f0f6ff;
+            padding:1rem;
+            border-radius:8px;
+            margin:1rem 0;
+            line-height:1.7;
+        }
+        .q-heading{
+            font-weight:bold;
+            margin-top:1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align:center;">HSK1 第十四课练习 我看了一个电影</h1>
+
+    <!-- 📝 单词练习 -->
+    <div class="card">
+        <h2>单词练习</h2>
+        <div class="word-info">Pinyin: <span id="wordPinyin"></span></div>
+        <div class="word-info">Meaning: <span id="wordMeaning"></span></div>
+        <input id="vocabInput" placeholder="写出正确的汉字">
+        <p id="instantFeedback"></p>
+        <br>
+        <button type="button" class="btn-blue" onclick="submitWord()">提交</button>
+        <button type="button" class="btn-blue" onclick="nextWord()">下一个</button>
+        <br>
+        <button type="button" class="btn-blue" onclick="showVocabScore()">查看单词总分</button>
+        <p id="vocabResultText" class="result-text"></p>
+    </div>
+
+    <!-- 📖 阅读（两篇短文，每篇3道选择题，全部中文） -->
+    <div class="card">
+        <h2>阅读</h2>
+        <p class="q-heading">短文一</p>
+        <div class="hsk-paragraph">
+            上了火车，中午车开了以后，车上有些人在看书，有些人睡觉了。陈天中在车上看了一个电影，他没有看见王老师。王一飞问大家会不会写汉字，白家月说他们都会写汉字了。
+        </div>
+        <p><strong>第1题：中午车开以后，陈天中在车上做了什么？</strong></p>
+        <label class="mcq-option"><input type="radio" name="p1q1" value="A"> A. 看了一个电影</label>
+        <label class="mcq-option"><input type="radio" name="p1q1" value="B"> B. 看书</label>
+        <label class="mcq-option"><input type="radio" name="p1q1" value="C"> C. 睡觉</label>
+
+        <p><strong>第2题：白家月他们现在会不会写汉字？</strong></p>
+        <label class="mcq-option"><input type="radio" name="p1q2" value="A"> A. 都会写了</label>
+        <label class="mcq-option"><input type="radio" name="p1q2" value="B"> B. 都不会写</label>
+        <label class="mcq-option"><input type="radio" name="p1q2" value="C"> C. 只有白家月会写</label>
+
+        <p><strong>第3题：陈天中在车上看见王老师了吗？</strong></p>
+        <label class="mcq-option"><input type="radio" name="p1q3" value="A"> A. 没有看见</label>
+        <label class="mcq-option"><input type="radio" name="p1q3" value="B"> B. 看见了</label>
+        <label class="mcq-option"><input type="radio" name="p1q3" value="C"> C. 看见了一会儿</label>
+
+        <hr>
+        <p class="q-heading">短文二</p>
+        <div class="hsk-paragraph">
+            明年刘明的女儿要上中学，儿子要上小学。他们家里就有了一个中学生和一个小学生。上学以后，他们都很忙。时间太晚了，刘明和王一雪准备睡觉。
+        </div>
+        <p><strong>第4题：明年刘明的女儿上什么学校？</strong></p>
+        <label class="mcq-option"><input type="radio" name="p2q1" value="A"> A. 中学</label>
+        <label class="mcq-option"><input type="radio" name="p2q1" value="B"> B. 小学</label>
+        <label class="mcq-option"><input type="radio" name="p2q1" value="C"> C. 大学</label>
+
+        <p><strong>第5题：上学以后，他们怎么样？</strong></p>
+        <label class="mcq-option"><input type="radio" name="p2q2" value="A"> A. 都很忙</label>
+        <label class="mcq-option"><input type="radio" name="p2q2" value="B"> B. 都很闲</label>
+        <label class="mcq-option"><input type="radio" name="p2q2" value="C"> C. 都不开心</label>
+
+        <p><strong>第6题：刘明和王一雪最后要做什么？</strong></p>
+        <label class="mcq-option"><input type="radio" name="p2q3" value="A"> A. 睡觉</label>
+        <label class="mcq-option"><input type="radio" name="p2q3" value="B"> B. 上学</label>
+        <label class="mcq-option"><input type="radio" name="p2q3" value="C"> C. 看电影</label>
+
+        <br>
+        <button type="button" class="btn-blue" onclick="submitReading()">提交</button>
+        <p id="readingScoreText" class="result-text"></p>
+        <div id="readingAnswerFeedback" class="answer-feedback"></div>
+    </div>
+
+    <!-- ✍️ 写作 -->
+    <div class="card">
+        <h2>写作</h2>
+        <p>答题要求：完成任务一和任务二</p>
+
+        <p><strong>任务一：填空（5道题）</strong></p>
+        <p>1. 我看____一个电影。</p>
+        <input id="w1Input" placeholder="写出汉字">
+        <p>2. 明年女儿要____中学。</p>
+        <input id="w2Input" placeholder="写出汉字">
+        <p>3. 我们____会写汉字了。</p>
+        <input id="w3Input" placeholder="写出汉字">
+        <p>4. ____午，火车开车了。</p>
+        <input id="w4Input" placeholder="写出汉字">
+        <p>5. ____些人在看书。</p>
+        <input id="w5Input" placeholder="写出汉字">
+
+        <p><strong>任务二：连词成句（5道题）</strong></p>
+        <p>1. 词语：我 / 电影 / 了 / 一个 / 看 / 。</p>
+        <input id="w6Input" placeholder="写出完整正确的句子">
+        <p>2. 词语：都 / 他们 / 忙 / 了 / 。</p>
+        <input id="w7Input" placeholder="写出完整正确的句子">
+        <p>3. 词语：明年 / 上 / 女儿 / 中学 / 。</p>
+        <input id="w8Input" placeholder="写出完整正确的句子">
+        <p>4. 词语：汉字 / 都会 / 写 / 我们 / 了 / 。</p>
+        <input id="w9Input" placeholder="写出完整正确的句子">
+        <p>5. 词语：火车 / 上 / 我 / 了 / 。</p>
+        <input id="w10Input" placeholder="写出完整正确的句子">
+
+        <br>
+        <button type="button" class="btn-blue" onclick="submitWriting()">提交</button>
+        <p id="writingScoreText" class="result-text"></p>
+        <div id="writingAnswerFeedback" class="answer-feedback"></div>
+    </div>
+
+    <script>
+        // 单词表
+        const vocabList = [
+            {char:"上", pinyin:"shàng", meaning:"go up; get on; board"},
+            {char:"火车", pinyin:"huǒchē", meaning:"train"},
+            {char:"中午", pinyin:"zhōngwǔ", meaning:"noon"},
+            {char:"开", pinyin:"kāi", meaning:"(of vehicles) depart; leave"},
+            {char:"有些", pinyin:"yǒuxiē", meaning:"some"},
+            {char:"有的", pinyin:"yǒude", meaning:"some"},
+            {char:"了", pinyin:"le", meaning:"particle (action completed)"},
+            {char:"写", pinyin:"xiě", meaning:"write"},
+            {char:"都", pinyin:"dōu", meaning:"all; both"},
+            {char:"听见", pinyin:"tīngjiàn", meaning:"hear"},
+            {char:"不要", pinyin:"búyào", meaning:"don’t"},
+            {char:"说话", pinyin:"shuōhuà", meaning:"say; speak; talk"},
+            {char:"听", pinyin:"tīng", meaning:"listen to; hear"},
+            {char:"哪些", pinyin:"nǎxiē", meaning:"which"},
+            {char:"字", pinyin:"zì", meaning:"character; word"},
+            {char:"汉语", pinyin:"Hànyǔ", meaning:"Chinese language"},
+            {char:"汉字", pinyin:"Hànzì", meaning:"Chinese character"},
+            {char:"明年", pinyin:"míngnián", meaning:"next year"},
+            {char:"中学", pinyin:"zhōngxué", meaning:"middle school"},
+            {char:"小学", pinyin:"xiǎoxué", meaning:"primary school"},
+            {char:"中学生", pinyin:"zhōngxuéshēng", meaning:"middle school student"},
+            {char:"小学生", pinyin:"xiǎoxuéshēng", meaning:"primary school student"},
+            {char:"上学", pinyin:"shàngxué", meaning:"start school; go to school"},
+            {char:"他们", pinyin:"tāmen", meaning:"they; them"},
+            {char:"她们", pinyin:"tāmen", meaning:"(female) they; them"},
+            {char:"它们", pinyin:"tāmen", meaning:"(things) they; them"},
+            {char:"晚", pinyin:"wǎn", meaning:"late"}
+        ];
+        let currentWordIndex = 0;
+        let vocabScore = 0;
+        let answeredIndex = [];
+
+        function loadWord(){
+            const word = vocabList[currentWordIndex];
+            document.getElementById("wordPinyin").innerText = word.pinyin;
+            document.getElementById("wordMeaning").innerText = word.meaning;
+            document.getElementById("vocabInput").value = "";
+            document.getElementById("instantFeedback").innerText = "";
+        }
+        function submitWord(){
+            if(answeredIndex.includes(currentWordIndex)){
+                document.getElementById("instantFeedback").innerText = "✅ 这道单词你已经提交过了，请点下一个。";
+                return;
+            }
+            const userAns = document.getElementById("vocabInput").value.trim();
+            const correctAns = vocabList[currentWordIndex].char;
+            answeredIndex.push(currentWordIndex);
+
+            if(userAns === correctAns){
+                vocabScore++;
+                document.getElementById("instantFeedback").innerText = "✅ 正确！";
+                document.getElementById("instantFeedback").style.color="#1a8c35";
+            }else{
+                document.getElementById("instantFeedback").innerText = `❌ 错误！正确答案：${correctAns}`;
+                document.getElementById("instantFeedback").style.color="#d62828";
+            }
+        }
+        function nextWord(){
+            if(currentWordIndex < vocabList.length - 1){
+                currentWordIndex++;
+                loadWord();
+            }
+        }
+        function showVocabScore(){
+            document.getElementById("vocabResultText").innerText = `📝 单词得分：${vocabScore}/${vocabList.length}`;
+        }
+        loadWord();
+
+        // 阅读提交
+        function submitReading(){
+            let score = 0;
+            const ans = {
+                p1q1:{val:"A", text:"A. 看了一个电影"},
+                p1q2:{val:"A", text:"A. 都会写了"},
+                p1q3:{val:"A", text:"A. 没有看见"},
+                p2q1:{val:"A", text:"A. 中学"},
+                p2q2:{val:"A", text:"A. 都很忙"},
+                p2q3:{val:"A", text:"A. 睡觉"}
+            }
+            const total = Object.keys(ans).length;
+            let feedbackHtml = "<strong>参考答案：</strong><br>";
+            for(let key in ans){
+                let selected = document.querySelector(`input[name="${key}"]:checked`);
+                const userAnswer = selected ? selected.value : "未作答";
+                if(userAnswer === ans[key].val){
+                    score++;
+                    feedbackHtml += `${key}: ✅ ${ans[key].text}<br>`;
+                }else{
+                    feedbackHtml += `${key}: ❌ 正确答案 → ${ans[key].text}<br>`;
+                }
+            }
+            document.getElementById("readingScoreText").innerText = `📖 阅读得分: ${score}/${total}`;
+            document.getElementById("readingAnswerFeedback").innerHTML = feedbackHtml;
+        }
+
+        // 写作提交
+        function submitWriting(){
+            let score = 0;
+            const correctWriting = {
+                w1Input:{ans:"了", q:"任务一 第1题：我看____一个电影。"},
+                w2Input:{ans:"上", q:"任务一 第2题：明年女儿要____中学。"},
+                w3Input:{ans:"都", q:"任务一 第3题：我们____会写汉字了。"},
+                w4Input:{ans:"中", q:"任务一 第4题：____午，火车开车了。"},
+                w5Input:{ans:"有", q:"任务一 第5题：____些人在看书。"},
+                w6Input:{ans:"我看了一个电影。", q:"任务二 第1题连词成句：我 / 电影 / 了 / 一个 / 看 / 。"},
+                w7Input:{ans:"他们都忙了。", q:"任务二 第2题连词成句：都 / 他们 / 忙 / 了 / 。"},
+                w8Input:{ans:"明年女儿上中学。", q:"任务二 第3题连词成句：明年 / 上 / 女儿 / 中学 / 。"},
+                w9Input:{ans:"我们都会写汉字了。", q:"任务二 第4题连词成句：汉字 / 都会 / 写 / 我们 / 了 / 。"},
+                w10Input:{ans:"我上火车了。", q:"任务二 第5题连词成句：火车 / 上 / 我 / 了 / 。"}
+            }
+            const totalWriting = Object.keys(correctWriting).length;
+            let feedbackHtml = "<strong>写作参考答案：</strong><br>";
+            for(let key in correctWriting){
+                let val = document.getElementById(key).value.trim();
+                if(val === correctWriting[key].ans){
+                    score++;
+                    feedbackHtml += `${correctWriting[key].q} ✅ ${correctWriting[key].ans}<br>`;
+                }else{
+                    feedbackHtml += `${correctWriting[key].q} ❌ 正确答案 → ${correctWriting[key].ans}<br>`;
+                }
+            }
+            document.getElementById("writingScoreText").innerText = `✍️ 写作得分: ${score}/${totalWriting}`;
+            document.getElementById("writingAnswerFeedback").innerHTML = feedbackHtml;
+        }
+    </script>
+</body>
+</html>

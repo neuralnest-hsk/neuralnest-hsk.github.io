@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HSK1 第十五课练习</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            max-width: 720px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background-color: #f7f7f7;
+        }
+        .card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 6px #00000018;
+        }
+        h2 {
+            color: #b82626;
+        }
+        .mcq-option {
+            display: block;
+            margin: 0.8rem 0;
+            cursor: pointer;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 0.7rem;
+            margin: 0.5rem 0 1.2rem;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+        .btn-blue{
+            padding: 0.8rem 1.2rem;
+            border: none;
+            background-color: #2b78e4;
+            color: white;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin:0.4rem;
+        }
+        .btn-blue:hover {
+            background-color: #1d5fb8;
+        }
+        .result-text {
+            margin-top: 1rem;
+            font-weight: bold;
+            color: #1a8c35;
+        }
+        hr {
+            margin: 2rem 0;
+        }
+        .word-info{
+            font-size:1.1rem;
+            margin:0.6rem 0;
+        }
+        .answer-feedback{
+            margin-top:1rem;
+            border-top:1px solid #ddd;
+            padding-top:1rem;
+        }
+        .hsk-paragraph{
+            background-color:#f0f6ff;
+            padding:1rem;
+            border-radius:8px;
+            margin:1rem 0;
+            line-height:1.7;
+        }
+        .q-heading{
+            font-weight:bold;
+            margin-top:1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align:center;">HSK1 第十五课练习 大兴机场见！</h1>
+
+    <!-- 📝 单词练习 -->
+    <div class="card">
+        <h2>单词练习</h2>
+        <div class="word-info">Pinyin: <span id="wordPinyin"></span></div>
+        <div class="word-info">Meaning: <span id="wordMeaning"></span></div>
+        <input id="vocabInput" placeholder="写出正确的汉字">
+        <p id="instantFeedback"></p>
+        <br>
+        <button type="button" class="btn-blue" onclick="submitWord()">提交</button>
+        <button type="button" class="btn-blue" onclick="nextWord()">下一个</button>
+        <br>
+        <button type="button" class="btn-blue" onclick="showVocabScore()">查看单词总分</button>
+        <p id="vocabResultText" class="result-text"></p>
+    </div>
+
+    <!-- 📖 阅读（两篇短文，每篇3道选择题，全部中文） -->
+    <div class="card">
+        <h2>阅读</h2>
+        <p class="q-heading">短文一</p>
+        <div class="hsk-paragraph">
+            李文问大家爱吃哪个菜，白家月说她喜欢这个，也喜欢那个。陈天中觉得这些菜都很好吃，还很好看。李文爱吃中国菜，也喜欢做饭，让大家多吃点儿。安妮去年和男朋友去了西安，今年她想去北京。白家月前几年也去过西安，今年也想去北京。
+        </div>
+        <p><strong>第1题：安妮去年和男朋友去了哪里？</strong></p>
+        <label class="mcq-option"><input type="radio" name="p1q1" value="A"> A. 西安</label>
+        <label class="mcq-option"><input type="radio" name="p1q1" value="B"> B. 北京</label>
+        <label class="mcq-option"><input type="radio" name="p1q1" value="C"> C. 上海</label>
+
+        <p><strong>第2题：白家月前几年觉得西安怎么样？</strong></p>
+        <label class="mcq-option"><input type="radio" name="p1q2" value="A"> A. 非常好玩儿</label>
+        <label class="mcq-option"><input type="radio" name="p1q2" value="B"> B. 不好玩儿</label>
+        <label class="mcq-option"><input type="radio" name="p1q2" value="C"> C. 很无聊</label>
+
+        <p><strong>第3题：李文让大家怎么样？</strong></p>
+        <label class="mcq-option"><input type="radio" name="p1q3" value="A"> A. 多吃点儿</label>
+        <label class="mcq-option"><input type="radio" name="p1q3" value="B"> B. 少吃点儿</label>
+        <label class="mcq-option"><input type="radio" name="p1q3" value="C"> C. 不要吃</label>
+
+        <hr>
+        <p class="q-heading">短文二</p>
+        <div class="hsk-paragraph">
+            白家月和安妮坐飞机去北京，飞机要飞九个小时。王老师的家人都在北京，她的姐姐星期日有时间，可以去大兴机场接她们，她们也可以住在王老师家里。她们星期日早上八点到大兴机场。
+        </div>
+        <p><strong>第4题：白家月和安妮怎么去北京？</strong></p>
+        <label class="mcq-option"><input type="radio" name="p2q1" value="A"> A. 飞机</label>
+        <label class="mcq-option"><input type="radio" name="p2q1" value="B"> B. 火车</label>
+        <label class="mcq-option"><input type="radio" name="p2q1" value="C"> C. 出租车</label>
+
+        <p><strong>第5题：飞机到北京要几个小时？</strong></p>
+        <label class="mcq-option"><input type="radio" name="p2q2" value="A"> A. 九个小时</label>
+        <label class="mcq-option"><input type="radio" name="p2q2" value="B"> B. 八个小时</label>
+        <label class="mcq-option"><input type="radio" name="p2q2" value="C"> C. 十个小时</label>
+
+        <p><strong>第6题：谁可以去机场接白家月和安妮？</strong></p>
+        <label class="mcq-option"><input type="radio" name="p2q3" value="A"> A. 王老师的姐姐</label>
+        <label class="mcq-option"><input type="radio" name="p2q3" value="B"> B. 王老师</label>
+        <label class="mcq-option"><input type="radio" name="p2q3" value="C"> C. 李文</label>
+
+        <br>
+        <button type="button" class="btn-blue" onclick="submitReading()">提交</button>
+        <p id="readingScoreText" class="result-text"></p>
+        <div id="readingAnswerFeedback" class="answer-feedback"></div>
+    </div>
+
+    <!-- ✍️ 写作 -->
+    <div class="card">
+        <h2>写作</h2>
+        <p>答题要求：完成任务一和任务二</p>
+
+        <p><strong>任务一：填空（5道题）</strong></p>
+        <p>1. 我____吃中国菜。</p>
+        <input id="w1Input" placeholder="写出汉字">
+        <p>2. ____年，安妮去了西安。</p>
+        <input id="w2Input" placeholder="写出汉字">
+        <p>3. 我们坐____去北京。</p>
+        <input id="w3Input" placeholder="写出汉字">
+        <p>4. 我____要九个小时。</p>
+        <input id="w4Input" placeholder="写出汉字">
+        <p>5. 老师的____可以去机场接我们。</p>
+        <input id="w5Input" placeholder="写出汉字">
+
+        <p><strong>任务二：连词成句（5道题）</strong></p>
+        <p>1. 词语：爱 / 中国菜 / 我 / 吃 / 。</p>
+        <input id="w6Input" placeholder="写出完整正确的句子">
+        <p>2. 词语：去年 / 西安 / 安妮 / 去了 / 。</p>
+        <input id="w7Input" placeholder="写出完整正确的句子">
+        <p>3. 词语：飞机 / 坐 / 我们 / 去北京 / 。</p>
+        <input id="w8Input" placeholder="写出完整正确的句子">
+        <p>4. 词语：九个小时 / 要 / 飞机 / 。</p>
+        <input id="w9Input" placeholder="写出完整正确的句子">
+        <p>5. 词语：机场 / 姐姐 / 接 / 去 / 。</p>
+        <input id="w10Input" placeholder="写出完整正确的句子">
+
+        <br>
+        <button type="button" class="btn-blue" onclick="submitWriting()">提交</button>
+        <p id="writingScoreText" class="result-text"></p>
+        <div id="writingAnswerFeedback" class="answer-feedback"></div>
+    </div>
+
+    <script>
+        // 单词表
+        const vocabList = [
+            {char:"爱", pinyin:"ài", meaning:"like; be fond of"},
+            {char:"哪个", pinyin:"nǎge", meaning:"which"},
+            {char:"去年", pinyin:"qùnián", meaning:"last year"},
+            {char:"男朋友", pinyin:"nánpéngyou", meaning:"boyfriend"},
+            {char:"几", pinyin:"jǐ", meaning:"a few; several"},
+            {char:"年", pinyin:"nián", meaning:"year"},
+            {char:"好玩儿", pinyin:"hǎowánr", meaning:"fun; interesting"},
+            {char:"飞机", pinyin:"fēijī", meaning:"plane"},
+            {char:"要", pinyin:"yào", meaning:"need; take"},
+            {char:"小时", pinyin:"xiǎoshí", meaning:"hour"},
+            {char:"家人", pinyin:"jiārén", meaning:"family (member)"},
+            {char:"时间", pinyin:"shíjiān", meaning:"time"},
+            {char:"机场", pinyin:"jīchǎng", meaning:"airport"},
+            {char:"接", pinyin:"jiē", meaning:"meet; welcome"},
+            {char:"住", pinyin:"zhù", meaning:"live; stay"},
+            {char:"早", pinyin:"zǎo", meaning:"early"},
+            {char:"那", pinyin:"nà", meaning:"then"}
+        ];
+        let currentWordIndex = 0;
+        let vocabScore = 0;
+        let answeredIndex = [];
+
+        function loadWord(){
+            const word = vocabList[currentWordIndex];
+            document.getElementById("wordPinyin").innerText = word.pinyin;
+            document.getElementById("wordMeaning").innerText = word.meaning;
+            document.getElementById("vocabInput").value = "";
+            document.getElementById("instantFeedback").innerText = "";
+        }
+        function submitWord(){
+            if(answeredIndex.includes(currentWordIndex)){
+                document.getElementById("instantFeedback").innerText = "✅ 这道单词你已经提交过了，请点下一个。";
+                return;
+            }
+            const userAns = document.getElementById("vocabInput").value.trim();
+            const correctAns = vocabList[currentWordIndex].char;
+            answeredIndex.push(currentWordIndex);
+
+            if(userAns === correctAns){
+                vocabScore++;
+                document.getElementById("instantFeedback").innerText = "✅ 正确！";
+                document.getElementById("instantFeedback").style.color="#1a8c35";
+            }else{
+                document.getElementById("instantFeedback").innerText = `❌ 错误！正确答案：${correctAns}`;
+                document.getElementById("instantFeedback").style.color="#d62828";
+            }
+        }
+        function nextWord(){
+            if(currentWordIndex < vocabList.length - 1){
+                currentWordIndex++;
+                loadWord();
+            }
+        }
+        function showVocabScore(){
+            document.getElementById("vocabResultText").innerText = `📝 单词得分：${vocabScore}/${vocabList.length}`;
+        }
+        loadWord();
+
+        // 阅读提交
+        function submitReading(){
+            let score = 0;
+            const ans = {
+                p1q1:{val:"A", text:"A. 西安"},
+                p1q2:{val:"A", text:"A. 非常好玩儿"},
+                p1q3:{val:"A", text:"A. 多吃点儿"},
+                p2q1:{val:"A", text:"A. 飞机"},
+                p2q2:{val:"A", text:"A. 九个小时"},
+                p2q3:{val:"A", text:"A. 王老师的姐姐"}
+            }
+            const total = Object.keys(ans).length;
+            let feedbackHtml = "<strong>参考答案：</strong><br>";
+            for(let key in ans){
+                let selected = document.querySelector(`input[name="${key}"]:checked`);
+                const userAnswer = selected ? selected.value : "未作答";
+                if(userAnswer === ans[key].val){
+                    score++;
+                    feedbackHtml += `${key}: ✅ ${ans[key].text}<br>`;
+                }else{
+                    feedbackHtml += `${key}: ❌ 正确答案 → ${ans[key].text}<br>`;
+                }
+            }
+            document.getElementById("readingScoreText").innerText = `📖 阅读得分: ${score}/${total}`;
+            document.getElementById("readingAnswerFeedback").innerHTML = feedbackHtml;
+        }
+
+        // 写作提交
+        function submitWriting(){
+            let score = 0;
+            const correctWriting = {
+                w1Input:{ans:"爱", q:"任务一 第1题：我____吃中国菜。"},
+                w2Input:{ans:"去", q:"任务一 第2题：____年，安妮去了西安。"},
+                w3Input:{ans:"飞机", q:"任务一 第3题：我们坐____去北京。"},
+                w4Input:{ans:"飞机", q:"任务一 第4题：我____要九个小时。"},
+                w5Input:{ans:"姐姐", q:"任务一 第5题：老师的____可以去机场接我们。"},
+                w6Input:{ans:"我爱吃中国菜。", q:"任务二 第1题连词成句：爱 / 中国菜 / 我 / 吃 / 。"},
+                w7Input:{ans:"去年安妮去了西安。", q:"任务二 第2题连词成句：去年 / 西安 / 安妮 / 去了 / 。"},
+                w8Input:{ans:"我们坐飞机去北京。", q:"任务二 第3题连词成句：飞机 / 坐 / 我们 / 去北京 / 。"},
+                w9Input:{ans:"飞机要九个小时。", q:"任务二 第4题连词成句：九个小时 / 要 / 飞机 / 。"},
+                w10Input:{ans:"姐姐去机场接。", q:"任务二 第5题连词成句：机场 / 姐姐 / 接 / 去 / 。"}
+            }
+            const totalWriting = Object.keys(correctWriting).length;
+            let feedbackHtml = "<strong>写作参考答案：</strong><br>";
+            for(let key in correctWriting){
+                let val = document.getElementById(key).value.trim();
+                if(val === correctWriting[key].ans){
+                    score++;
+                    feedbackHtml += `${correctWriting[key].q} ✅ ${correctWriting[key].ans}<br>`;
+                }else{
+                    feedbackHtml += `${correctWriting[key].q} ❌ 正确答案 → ${correctWriting[key].ans}<br>`;
+                }
+            }
+            document.getElementById("writingScoreText").innerText = `✍️ 写作得分: ${score}/${totalWriting}`;
+            document.getElementById("writingAnswerFeedback").innerHTML = feedbackHtml;
+        }
+    </script>
+</body>
+</html>
